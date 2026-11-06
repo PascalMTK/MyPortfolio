@@ -127,3 +127,95 @@ main, .nav__links, .footer { transition: opacity .22s ease; }
 html.is-switching main, html.is-switching .nav__links, html.is-switching .footer { opacity: 0; }
 .brand { white-space: nowrap; }
 @media (max-width: 380px) { .brand { font-size: 15px; gap: 8px; } .nav__end { gap: 6px; } }
+
+/* ---------- Premium layer ---------- */
+
+/* Inertial scrolling */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Two-layer curtain: a colour edge trails the dark panel */
+.intro-under { display: none; }
+.js .intro-under {
+  position: fixed; inset: 0; z-index: 89; display: block;
+  background: var(--grad); pointer-events: none;
+  transition: transform 1s .09s var(--ease-inout);
+}
+.js .intro-under.is-done { transform: translateY(-101%); }
+.js .intro-under.is-gone { display: none; }
+
+/* Hero depth: slow breathing light behind the portrait */
+.stage__bg::before {
+  content: ""; position: absolute; inset: -10%;
+  background: radial-gradient(38% 46% at 74% 40%, rgba(255, 70, 120, .34), transparent 72%);
+  animation: breathe 9s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+@keyframes breathe { from { opacity: .55; transform: scale(.96); } to { opacity: 1; transform: scale(1.06); } }
+
+/* Menu steps aside on the way down, returns on the way up */
+.nav { transition: background .3s, border-color .3s, transform .6s var(--ease-expo); }
+.nav.is-hidden { transform: translateY(calc(-100% - 24px)); }
+.nav:has(:focus-visible) { transform: none; }
+
+/* Reading text lights up word by word */
+.sw { opacity: .24; transition: opacity .45s ease; }
+.sw.on { opacity: 1; }
+.about__text p .sw.on { color: inherit; }
+
+/* Project images keep moving inside their frame */
+.shot__bar { position: relative; z-index: 2; background: var(--bg-2); }
+.js .shot.reveal.is-in img { transform: scale(1.12); }
+.js .shot.reveal.is-in:hover img { transform: scale(1.16); }
+.js .shot.reveal img { transform: scale(1.26); will-change: translate; }
+
+/* Project copy arrives line by line */
+.js .project__body.reveal { opacity: 1; transform: none; transition: none; }
+.js .project__body.reveal > * {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity var(--dur-m) var(--ease-expo), transform var(--dur-l) var(--ease-expo);
+  transition-delay: calc(var(--n, 0) * 75ms + 240ms);
+}
+.js .project__body.reveal.is-in > * { opacity: 1; transform: none; }
+.project__body > :nth-child(2) { --n: 1; }
+.project__body > :nth-child(3) { --n: 2; }
+.project__body > :nth-child(4) { --n: 3; }
+.project__body > :nth-child(5) { --n: 4; }
+.project__body > :nth-child(6) { --n: 5; }
+.project__body > :nth-child(7) { --n: 6; }
+
+/* Workflow rule draws across */
+.flow li { position: relative; border-top-color: transparent; }
+.flow li::before {
+  content: ""; position: absolute; top: -2px; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--pink), var(--line));
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform 1.3s var(--ease-inout); transition-delay: inherit;
+}
+.flow li.is-in::before { transform: scaleX(1); }
+
+/* Pointer spotlight on glass cards */
+.skill, .contact__card { position: relative; overflow: hidden; }
+.skill::after, .contact__card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 122, 69, .2), transparent 70%);
+  transition: opacity .4s ease;
+}
+.skill:hover::after, .contact__card:hover::after { opacity: 1; }
+
+/* Magnetic buttons */
+.pill-btn { transition: transform var(--dur-s) var(--ease-expo), box-shadow var(--dur-s) var(--ease-expo), translate .55s var(--ease-expo); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .intro-under { display: none; }
+  .stage__bg::before { animation: none; }
+  .sw { opacity: 1; }
+  .js .shot.reveal.is-in img, .js .shot.reveal img, .js .shot.reveal.is-in:hover img { transform: none; }
+  .js .project__body.reveal > * { opacity: 1; transform: none; transition: none; }
+  .flow li::before { transform: none; transition: none; }
+}
+@media print {
+  .intro-under { display: none !important; }
+  .sw { opacity: 1; }
+}
