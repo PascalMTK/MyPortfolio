@@ -1,0 +1,113 @@
+/* Motion system: one set of curves and durations for the whole page */
+:root {
+  --ease-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-inout: cubic-bezier(.76, 0, .24, 1);
+  --dur-s: .35s;
+  --dur-m: .9s;
+  --dur-l: 1.25s;
+}
+
+/* Scroll progress */
+.progress {
+  position: fixed; z-index: 60; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--grad); transform: scaleX(0); transform-origin: 0 50%;
+  will-change: transform; pointer-events: none;
+}
+
+/* Load-in curtain */
+.intro { display: none; }
+.js .intro {
+  position: fixed; inset: 0; z-index: 90;
+  display: grid; place-content: center; justify-items: center; gap: 22px;
+  background: var(--bg); pointer-events: none;
+  transition: transform 1s var(--ease-inout);
+}
+.intro__mark { display: flex; align-items: center; gap: 14px; overflow: hidden; }
+.intro__mark img { animation: mark .8s var(--ease-expo) both; }
+.intro__name { font-size: 22px; font-weight: 700; letter-spacing: -.01em; animation: rise .9s .08s var(--ease-expo) both; }
+.intro__bar { width: 200px; height: 2px; overflow: hidden; background: rgba(255, 255, 255, .12); }
+.intro__bar i { display: block; height: 100%; background: var(--grad); transform-origin: 0 50%; animation: load .85s .1s var(--ease-inout) both; }
+.intro.is-done { transform: translateY(-101%); }
+.intro.is-gone { display: none; }
+@keyframes mark { from { opacity: 0; transform: scale(.7) rotate(-20deg); } }
+@keyframes rise { from { opacity: 0; transform: translateY(110%); } }
+@keyframes load { from { transform: scaleX(0); } }
+
+/* Hero entrance, staged after the curtain */
+.line { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+.line > span { display: block; }
+.js .stage__portrait img { transition: opacity 1.2s var(--ease-expo), transform var(--dur-l) var(--ease-expo); }
+.js .stage__bg { transition: opacity 1.4s ease; }
+.js .hero__hey, .js .hero__line, .js .hero .hero__sub, .js .hero__cta, .js .stat, .js .strip li, .js .nav > * {
+  transition: opacity var(--dur-m) var(--ease-expo), transform var(--dur-m) var(--ease-expo);
+}
+.js .line > span { transition: transform var(--dur-l) var(--ease-expo); }
+html.is-loading .stage__portrait img { opacity: 0; transform: translateY(5%) scale(1.06); }
+html.is-loading .stage__bg { opacity: 0; }
+html.is-loading .line > span { transform: translateY(112%); }
+html.is-loading .hero__hey, html.is-loading .hero__line, html.is-loading .hero .hero__sub,
+html.is-loading .hero__cta, html.is-loading .stat, html.is-loading .strip li {
+  opacity: 0; transform: translateY(22px);
+}
+html.is-loading .nav > * { opacity: 0; transform: translateY(-12px); }
+.js .line:nth-child(2) > span { transition-delay: .08s; }
+.js .hero__line { transition-delay: .24s; }
+.js .hero .hero__sub { transition-delay: .3s; }
+.js .hero__cta { transition-delay: .36s; }
+.js .stat:nth-child(1) { transition-delay: .3s; }
+.js .stat:nth-child(2) { transition-delay: .38s; }
+.js .stat:nth-child(3) { transition-delay: .46s; }
+.js .strip li:nth-child(2) { transition-delay: .06s; }
+.js .strip li:nth-child(3) { transition-delay: .12s; }
+.js .strip li:nth-child(4) { transition-delay: .18s; }
+
+/* Pin hands over to the next section */
+.stage__pin { transform-origin: 50% 0; will-change: transform, opacity; }
+
+/* Headings rise word by word from behind a mask */
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
+.w > span { display: inline-block; transition: transform var(--dur-l) var(--ease-expo); transition-delay: calc(var(--i) * 45ms); }
+.js .split:not(.is-in) .w > span { transform: translateY(112%); }
+
+/* Generic reveal: soft travel, long settle */
+.js .reveal { transform: translateY(32px); transition: opacity var(--dur-m) var(--ease-expo), transform var(--dur-l) var(--ease-expo); }
+.js .reveal.is-in { transform: none; }
+
+/* Project images wipe open and settle */
+.js .shot.reveal { opacity: 1; transform: none; clip-path: inset(0 0 100% 0 round var(--radius)); transition: clip-path 1.3s var(--ease-inout), box-shadow var(--dur-m) var(--ease-expo); }
+.js .shot.reveal.is-in { clip-path: inset(0 0 0 0 round var(--radius)); }
+.js .shot.reveal img { transform: scale(1.14); transition: transform 1.7s var(--ease-expo); }
+.js .shot.reveal.is-in img { transform: none; }
+.js .shot.reveal.is-in:hover img { transform: scale(1.03); transition-duration: .9s; }
+.shot:hover { box-shadow: 0 40px 90px -28px rgba(240, 36, 95, .7); }
+
+/* Project copy follows the image */
+.js .project__body.reveal { transition-delay: .18s; }
+
+/* Micro interactions */
+.nav__links a { position: relative; }
+.nav__links a::after {
+  content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 1.5px;
+  background: var(--accent); transform: scaleX(0); transform-origin: 100% 50%;
+  transition: transform var(--dur-s) var(--ease-expo);
+}
+.nav__links a:hover::after, .nav__links a.is-active::after { transform: scaleX(1); transform-origin: 0 50%; }
+.pill-btn { transition: transform var(--dur-s) var(--ease-expo), box-shadow var(--dur-s) var(--ease-expo); }
+.pill-btn__dot { transition: transform var(--dur-s) var(--ease-expo); }
+.pill-btn:active { transform: scale(.97); }
+.js .skill.reveal { transition: opacity var(--dur-m) var(--ease-expo), transform var(--dur-l) var(--ease-expo), border-color var(--dur-s) ease, background var(--dur-s) ease; }
+.js .skill.reveal.is-in:hover { transform: translateY(-4px); border-color: rgba(255, 122, 69, .5); background: rgba(255, 255, 255, .09); transition-delay: 0s; transition-duration: var(--dur-s); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .intro, .progress { display: none; }
+  .js .split:not(.is-in) .w > span { transform: none; }
+  .js .shot.reveal { clip-path: none; }
+  .js .shot.reveal img { transform: none; }
+}
+@media print {
+  .intro, .progress { display: none !important; }
+  .js .shot.reveal { clip-path: none; }
+}
+
+/* The next section slides up over the hero like a sheet */
+.about { background: var(--bg); border-radius: 32px 32px 0 0; box-shadow: 0 -30px 80px rgba(0, 0, 0, .55); z-index: 2; }
