@@ -6,6 +6,10 @@
   var $ = function (id) { return document.getElementById(id); };
   var root = document.documentElement;
 
+  /* Always open at the top, unless a link points to a section */
+  if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+  if (!window.location.hash) window.scrollTo(0, 0);
+
   var clamp = function (v) { return Math.min(1, Math.max(0, v)); };
   var range = function (p, a, b) { return clamp((p - a) / (b - a)); };
   var smooth = function (t) { return t * t * t * (t * (t * 6 - 15) + 10); };

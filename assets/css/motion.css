@@ -27,7 +27,7 @@
 .intro__name { font-size: 22px; font-weight: 700; letter-spacing: -.01em; animation: rise .9s .08s var(--ease-expo) both; }
 .intro__bar { width: 200px; height: 2px; overflow: hidden; background: rgba(255, 255, 255, .12); }
 .intro__bar i { display: block; height: 100%; background: var(--grad); transform-origin: 0 50%; animation: load .85s .1s var(--ease-inout) both; }
-.intro.is-done { transform: translateY(-101%); }
+.intro.is-done { transform: translateY(101%); }
 .intro.is-gone { display: none; }
 @keyframes mark { from { opacity: 0; transform: scale(.7) rotate(-20deg); } }
 @keyframes rise { from { opacity: 0; transform: translateY(110%); } }
@@ -42,7 +42,7 @@
   transition: opacity var(--dur-m) var(--ease-expo), transform var(--dur-m) var(--ease-expo);
 }
 .js .line > span { transition: transform var(--dur-l) var(--ease-expo); }
-html.is-loading .stage__portrait img { opacity: 0; transform: translateY(5%) scale(1.06); }
+html.is-loading .stage__portrait img { opacity: 0; transform: translateY(-5%) scale(1.06); }
 html.is-loading .stage__bg { opacity: 0; }
 html.is-loading .line > span { transform: translateY(112%); }
 html.is-loading .hero__hey, html.is-loading .hero__line, html.is-loading .hero .hero__sub,
@@ -142,7 +142,7 @@ html.lenis, html.lenis body { height: auto; }
   background: var(--grad); pointer-events: none;
   transition: transform 1s .09s var(--ease-inout);
 }
-.js .intro-under.is-done { transform: translateY(-101%); }
+.js .intro-under.is-done { transform: translateY(101%); }
 .js .intro-under.is-gone { display: none; }
 
 /* Hero depth: slow breathing light behind the portrait */
