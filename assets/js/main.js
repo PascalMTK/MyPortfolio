@@ -400,7 +400,7 @@
         });
       };
       el.onerror = done;
-      el.src = 'assets/seq/' + (small ? 'm' : 'd') + '/' + (i < 10 ? '0' : '') + i + '.webp';
+      el.src = 'assets/seq/' + (small ? 'm' : 'd') + '/' + (i < 10 ? '0' : '') + i + '.webp?v=2';
     }
     for (var c = 0; c < 5; c++) pull();
   }
@@ -415,7 +415,9 @@
       film.start = time;
     }
     var idle = (1 - Math.cos((time - film.start) / 6500 * Math.PI * 2)) / 2;
-    var pos = range(p, 0, 0.86) + idle * 0.14 * (1 - range(p, 0, 0.04));
+    /* Turns toward the copy, holds, then back to camera for the close-up */
+    var turn = range(p, 0, 0.22) * (1 - range(p, 0.46, 0.82));
+    var pos = turn + idle * 0.24 * (1 - range(p, 0, 0.04));
     var want = Math.round(clamp(pos) * (film.count - 1));
     var best = want;
     for (var d = 0; d < film.count; d++) {
