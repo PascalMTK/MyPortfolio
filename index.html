@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/img/portrait.webp">
+  <link rel="preload" as="image" href="assets/img/portrait.webp" imagesrcset="assets/img/portrait.webp 1152w, assets/img/portrait-1800.webp 1800w, assets/img/portrait-4k.webp 2765w" imagesizes="(max-width: 760px) 90vw, 110vh">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/motion.css">
   <script>document.documentElement.classList.add('js')</script>
@@ -61,7 +61,7 @@
       <div class="stage__pin" id="pin">
         <div class="stage__bg" aria-hidden="true"></div>
         <div class="stage__portrait" id="portrait">
-          <img src="assets/img/portrait.webp" width="1152" height="1600" alt="Portrait of Pascal Mutaka in a grey blazer and white shirt" fetchpriority="high">
+          <img src="assets/img/portrait.webp" srcset="assets/img/portrait.webp 1152w, assets/img/portrait-1800.webp 1800w, assets/img/portrait-4k.webp 2765w" sizes="(max-width: 760px) 90vw, 110vh" width="2765" height="3840" alt="Portrait of Pascal Mutaka in a grey blazer and white shirt" fetchpriority="high">
         </div>
         <div class="stage__scrim" id="scrim" aria-hidden="true"></div>
 
