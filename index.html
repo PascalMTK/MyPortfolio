@@ -46,8 +46,14 @@
       <a href="#workflow">Workflow</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="pill-btn pill-btn--sm" href="#contact">Let's connect <span class="pill-btn__dot"><svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-    <button class="nav__toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
+    <div class="nav__end">
+      <div class="lang" role="group" aria-label="Choose language">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en" title="English">EN</button>
+        <button type="button" data-lang="fr" aria-pressed="false" lang="fr" title="Français">FR</button>
+      </div>
+      <a class="pill-btn pill-btn--sm" href="#contact">Let's connect <span class="pill-btn__dot"><svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      <button class="nav__toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
+    </div>
   </header>
 
   <main>
@@ -309,6 +315,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>

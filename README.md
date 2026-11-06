@@ -9,7 +9,7 @@ Plain HTML, CSS and JavaScript with no build step. Open `index.html` in a browse
 ```
 index.html          All page content
 assets/css          Styles and motion
-assets/js           Navigation and the scroll sequence in the hero
+assets/js           Navigation, motion and the English/French switch (French text is in i18n.js)
 assets/img          Portrait and project images
 ```
 

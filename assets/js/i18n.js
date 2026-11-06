@@ -1,0 +1,135 @@
+/* French text. Each English string on the page maps to its translation. */
+window.PORTFOLIO_FR = {
+  /* Page details */
+  'Pascal Mutaka | Full Stack Software Engineer in Namibia': 'Pascal Mutaka | Ingénieur logiciel Full Stack en Namibie',
+  'Pascal Mutaka is a full stack software engineer in Windhoek, Namibia, building web platforms for payments, delivery, training, bookings and education.': 'Pascal Mutaka est ingénieur logiciel full stack à Windhoek, en Namibie. Il crée des plateformes web pour les paiements, la livraison, la formation, les réservations et l\'éducation.',
+
+  /* Navigation */
+  'Skip to content': 'Aller au contenu',
+  'About': 'À propos',
+  'Projects': 'Projets',
+  'Skills': 'Compétences',
+  'Workflow': 'Méthode',
+  'Contact': 'Contact',
+  "Let's connect": 'Me contacter',
+  'Open menu': 'Ouvrir le menu',
+  'Close menu': 'Fermer le menu',
+  'Main': 'Navigation principale',
+  'Pascal Mutaka, back to top': 'Pascal Mutaka, retour en haut',
+  'Choose language': 'Choisir la langue',
+
+  /* Hero */
+  'Introduction': 'Présentation',
+  "Hey, I'm Pascal": 'Bonjour, je suis Pascal',
+  'Full Stack': 'Ingénieur',
+  'Engineer': 'Full Stack',
+  'Software should': 'Un logiciel doit',
+  'solve the problem.': 'résoudre le problème.',
+  'I build web platforms for payments, delivery, training and bookings, from Windhoek, Namibia.': 'Je crée des plateformes web pour les paiements, la livraison, la formation et les réservations, depuis Windhoek, en Namibie.',
+  'See my work': 'Voir mes projets',
+  'Open to work': 'Disponible',
+  'Live in production': 'En ligne',
+  'Featured projects': 'Projets présentés',
+  'Commits on these projects': 'Commits sur ces projets',
+  'Behind the code': 'Derrière le code',
+  'From a first idea to a live product people use.': 'De la première idée à un produit en ligne que les gens utilisent.',
+  'Design, database, backend, frontend and deployment. I care about all of it, because users feel all of it.': 'Conception, base de données, backend, frontend et déploiement. Tout compte pour moi, car les utilisateurs ressentent tout.',
+  'Get to know me': 'Mieux me connaître',
+  'What I do': 'Ce que je fais',
+  'Full Stack Web Apps': 'Applications web full stack',
+  'Payments & Dashboards': 'Paiements et dashboards',
+  'Real Time Systems': 'Systèmes en temps réel',
+  'AI Integration': 'Intégration de l\'IA',
+  'Portrait of Pascal Mutaka in a grey blazer and white shirt': 'Portrait de Pascal Mutaka en blazer gris et chemise blanche',
+
+  /* About */
+  'About me': 'À propos de moi',
+  'I build for the problems around me.': 'Je crée des solutions aux problèmes qui m\'entourent.',
+  "I'm Pascal Mutaka, a full stack software engineer based in Windhoek, Namibia.": 'Je suis Pascal Mutaka, ingénieur logiciel full stack basé à Windhoek, en Namibie.',
+  'Most of my work starts with something ordinary that should be easier: sending money across borders, getting a parcel delivered, proving a training certificate is real, waiting for a haircut without losing your afternoon, or helping a child hear their own language in a game.': 'La plupart de mes projets partent d\'une chose ordinaire qui devrait être plus simple : envoyer de l\'argent à l\'étranger, se faire livrer un colis, prouver qu\'un certificat de formation est authentique, attendre son tour chez le coiffeur sans perdre son après-midi, ou aider un enfant à entendre sa propre langue dans un jeu.',
+  'I like the whole journey. I model the data, write the rules, design the screens and put the product online. I care about clean architecture and careful UX, and I keep learning new tools because each project asks for something different.': 'J\'aime tout le parcours. Je modélise les données, j\'écris les règles, je conçois les écrans et je mets le produit en ligne. Je tiens à une architecture propre et à une expérience utilisateur soignée, et je continue d\'apprendre de nouveaux outils, car chaque projet demande quelque chose de différent.',
+  'Windhoek, Namibia': 'Windhoek, Namibie',
+
+  /* Projects */
+  'Selected work': 'Projets choisis',
+  'Six projects, six real problems.': 'Six projets, six vrais problèmes.',
+  'Live': 'En ligne',
+  'Visit live site': 'Voir le site',
+  'Technologies': 'Technologies',
+  'Built with Datalani Technology': 'Réalisé avec Datalani Technology',
+  'Solo project': 'Projet solo',
+  'Solo project, 144 commits': 'Projet solo, 144 commits',
+  'Team project with Team Vortex': 'Projet d\'équipe avec Team Vortex',
+
+  'Delivery platform': 'Plateforme de livraison',
+  'One website to send a parcel, book a ride, shop for groceries or pawn an item, with a single account and cart. Once an order is paid, a driver is assigned and the customer follows the delivery on a live map.': 'Un seul site pour envoyer un colis, réserver une course, faire ses courses ou mettre un objet en gage, avec un compte et un panier uniques. Une fois la commande payée, un chauffeur est assigné et le client suit la livraison sur une carte en direct.',
+  'Separate secure logins for customers, drivers and admins': 'Connexions sécurisées distinctes pour les clients, les chauffeurs et les administrateurs',
+  'Card payments through DPO, plus bank transfer with proof of payment': 'Paiement par carte via DPO et virement bancaire avec preuve de paiement',
+  'Live driver location on a map, from checkout to the door': 'Position du chauffeur en direct sur une carte, du paiement jusqu\'à la porte',
+  'Rider Africa home page with the headline We bring what you need to your door': 'Page d\'accueil de Rider Africa avec le titre We bring what you need to your door',
+
+  'Fintech operations': 'Opérations fintech',
+  'A platform for running international money transfers across African countries. Agents record and track each transaction, while the admin watches all activity from one dashboard.': 'Une plateforme pour gérer les transferts d\'argent internationaux entre pays africains. Les agents enregistrent et suivent chaque transaction, tandis que l\'administrateur supervise toute l\'activité depuis un seul tableau de bord.',
+  'Fees calculated automatically from a percentage set per country': 'Frais calculés automatiquement selon un pourcentage défini par pays',
+  'Monthly charts, top agents, printable receipts and Excel export': 'Graphiques mensuels, meilleurs agents, reçus imprimables et export Excel',
+  'French and English interface, with dark and light modes': 'Interface en français et en anglais, avec modes sombre et clair',
+  'BlueSky Transactions landing page in French for sending money across Africa': 'Page d\'accueil de BlueSky Transactions pour envoyer de l\'argent à travers l\'Afrique',
+
+  'Training management': 'Gestion de formations',
+  'A training platform for individuals, organisations and administrators. People can browse courses, enrol and earn certificates, and anyone can verify a certificate publicly.': 'Une plateforme de formation pour les particuliers, les organisations et les administrateurs. Chacun peut parcourir les cours, s\'inscrire et obtenir des certificats, et n\'importe qui peut vérifier un certificat publiquement.',
+  '44 screens across public, student, organisation and admin areas': '44 écrans répartis entre les espaces public, étudiant, organisation et administration',
+  'Certificates with unique IDs and public verification': 'Certificats avec identifiant unique et vérification publique',
+  'Organisation accounts with bulk employee upload': 'Comptes d\'organisation avec import groupé des employés',
+  'Bluescape Training Consultancy home page with the headline Where Skills Become Opportunity': 'Page d\'accueil de Bluescape Training Consultancy avec le titre Where Skills Become Opportunity',
+
+  'Live queue system': 'File d\'attente en direct',
+  'A first come, first served queue for a barbershop. Customers reserve a place, check in on arrival, step away for a moment and watch their position update, while the barber runs the queue from the same app.': 'Une file d\'attente pour salon de coiffure, selon le principe du premier arrivé, premier servi. Les clients réservent une place, s\'enregistrent à leur arrivée, peuvent s\'absenter un instant et suivre leur position en direct, pendant que le barbier gère la file depuis la même application.',
+  'Queue rules and an audit log enforced inside Postgres': 'Règles de la file et journal d\'audit appliqués directement dans Postgres',
+  'One place per person, even across several name-only sign-ups': 'Une seule place par personne, même avec plusieurs inscriptions par simple nom',
+  'Available in English, French and Portuguese': 'Disponible en anglais, en français et en portugais',
+  'Smart Cut Barbershop home page with the headline Join the queue from your phone and a live queue status': 'Page d\'accueil de Smart Cut Barbershop avec le titre Join the queue from your phone et l\'état de la file en direct',
+
+  'Marketplace': 'Place de marché',
+  'A buying and selling platform built around trust. Only E-Sell administrators publish products. Customers submit sell requests, and the team reviews each one before turning it into a full listing.': 'Une plateforme d\'achat et de vente fondée sur la confiance. Seuls les administrateurs d\'E-Sell publient les produits. Les clients soumettent des demandes de vente, et l\'équipe examine chacune d\'elles avant d\'en faire une annonce complète.',
+  'Sell request workflow from submission to published listing': 'Suivi des demandes de vente, de la soumission à l\'annonce publiée',
+  'Customer and admin roles with secure sessions': 'Rôles client et administrateur avec sessions sécurisées',
+  'Editable site settings, team pages and banners from the admin': 'Paramètres du site, équipe et bannières modifiables depuis l\'administration',
+  'E-Sell Namibia home page design with the headline Good finds, great possibilities': 'Maquette de la page d\'accueil d\'E-Sell Namibia avec le titre Good finds, great possibilities',
+
+  'AI education game': 'Jeu éducatif avec IA',
+  'An AI language game that helps Namibian children aged 3 to 10 learn Oshiwambo and Otjiherero through play, built for the Microwide Kids AI Challenge. Every word comes from a real recording, never from AI.': 'Un jeu de langues avec IA qui aide les enfants namibiens de 3 à 10 ans à apprendre l\'oshiwambo et l\'otjiherero en s\'amusant, créé pour le Microwide Kids AI Challenge. Chaque mot provient d\'un véritable enregistrement, jamais de l\'IA.',
+  'Children say a word aloud and Oryx checks it with speech recognition': 'L\'enfant prononce un mot à voix haute et Oryx le vérifie grâce à la reconnaissance vocale',
+  'Word cards, quizzes, matching, memory and spelling games': 'Cartes de mots, quiz, jeux d\'association, de mémoire et d\'orthographe',
+  '73 words and phrases in two Namibian languages': '73 mots et expressions dans deux langues namibiennes',
+  'Microwide Kids screen where a child chooses Oshiwambo or Otjiherero, with Oryx the mascot': 'Écran de Microwide Kids où l\'enfant choisit l\'oshiwambo ou l\'otjiherero, avec Oryx, la mascotte',
+
+  'Also built': 'Autres réalisations',
+  'NUST Electronic Voting': 'Vote électronique NUST',
+  'A JavaFX and MySQL desktop app for student elections, with one vote per student per election.': 'Une application de bureau JavaFX et MySQL pour les élections étudiantes, avec un seul vote par étudiant et par élection.',
+  'Blue Sky Website': 'Site web Blue Sky',
+  'A marketing site and customer portal for a money transfer agency, built with Next.js and Prisma.': 'Un site vitrine et un portail client pour une agence de transfert d\'argent, réalisés avec Next.js et Prisma.',
+
+  /* Skills */
+  'The tools I reach for.': 'Les outils que j\'utilise.',
+  'Frontend': 'Frontend',
+  'Backend': 'Backend',
+  'Data': 'Données',
+  'Tools': 'Outils',
+
+  /* Workflow */
+  'How I take a project from idea to live.': 'De l\'idée à la mise en ligne, ma méthode.',
+  'Understand': 'Comprendre',
+  'I start with who uses it and what goes wrong for them today.': 'Je commence par les utilisateurs et ce qui ne fonctionne pas pour eux aujourd\'hui.',
+  'Model the rules': 'Modéliser les règles',
+  'I design the data and business rules first, so the system stays correct as it grows.': 'Je conçois d\'abord les données et les règles métier, pour que le système reste fiable en grandissant.',
+  'Build in steps': 'Avancer par étapes',
+  'I ship small working pieces, test them and adjust from real feedback.': 'Je livre de petites parties fonctionnelles, je les teste et j\'ajuste selon les vrais retours.',
+  'Launch and improve': 'Lancer et améliorer',
+  'I deploy, watch how it behaves and keep making it better.': 'Je déploie, j\'observe le comportement du produit et je continue de l\'améliorer.',
+  'First, solve the problem. Then, write the code.': 'D\'abord, résoudre le problème. Ensuite, écrire le code.',
+
+  /* Contact */
+  'Have a problem worth solving?': 'Un problème qui mérite d\'être résolu ?',
+  "I'm open to full stack roles and freelance projects. Tell me what you're building.": 'Je suis ouvert aux postes full stack et aux missions freelance. Parlez-moi de votre projet.',
+  'Email me': 'M\'écrire'
+};

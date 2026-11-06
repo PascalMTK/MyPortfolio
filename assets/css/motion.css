@@ -111,3 +111,19 @@ html.is-loading .nav > * { opacity: 0; transform: translateY(-12px); }
 
 /* The next section slides up over the hero like a sheet */
 .about { background: var(--bg); border-radius: 32px 32px 0 0; box-shadow: 0 -30px 80px rgba(0, 0, 0, .55); z-index: 2; }
+
+/* Language switch */
+.nav__end { display: flex; align-items: center; gap: 10px; }
+.lang { display: flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255, 255, 255, .06); }
+.lang button {
+  min-width: 38px; min-height: 36px; padding: 0 8px;
+  border: 0; border-radius: 999px; background: none; color: var(--text);
+  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: background var(--dur-s) var(--ease-expo), color var(--dur-s) ease;
+}
+.lang button:hover { background: rgba(255, 255, 255, .1); }
+.lang button[aria-pressed="true"] { background: #fff; color: #15101a; }
+main, .nav__links, .footer { transition: opacity .22s ease; }
+html.is-switching main, html.is-switching .nav__links, html.is-switching .footer { opacity: 0; }
+.brand { white-space: nowrap; }
+@media (max-width: 380px) { .brand { font-size: 15px; gap: 8px; } .nav__end { gap: 6px; } }
