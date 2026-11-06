@@ -131,6 +131,9 @@ a { color: inherit; }
   will-change: transform;
 }
 .stage__portrait img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; }
+.stage__film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: bottom; visibility: hidden; }
+.stage__portrait.has-film .stage__film { visibility: visible; }
+.stage__portrait.has-film img { visibility: hidden; }
 .stage__scrim {
   position: absolute; inset: 0; opacity: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(11, 8, 16, .92) 0%, rgba(11, 8, 16, .6) 38%, transparent 66%);

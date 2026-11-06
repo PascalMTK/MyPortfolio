@@ -360,6 +360,75 @@
     centerShift = window.innerWidth / 2 - (portrait.offsetLeft + portrait.offsetWidth / 2);
   }
 
+  /* Portrait film: frames rendered from the real photo, scrubbed by scroll.
+     The still stays in place until enough frames are ready, and for anyone
+     who asked for less motion or less data. */
+  var film = { frames: [], count: 0, live: false, shown: -1, ready: 0, born: 0 };
+
+  function loadFilm() {
+    var conn = navigator.connection;
+    if (reduced || (conn && conn.saveData)) return;
+    var small = window.innerWidth <= 760;
+    film.count = small ? 31 : 60;
+    film.canvas = document.createElement('canvas');
+    film.canvas.className = 'stage__film';
+    film.canvas.setAttribute('aria-hidden', 'true');
+    film.canvas.width = small ? 720 : 1200;
+    film.canvas.height = small ? 1000 : 1667;
+    film.ctx = film.canvas.getContext('2d');
+    portrait.appendChild(film.canvas);
+
+    /* Coarse frames first, so scrubbing works before the set is complete */
+    var order = [];
+    [8, 4, 2, 1].forEach(function (step) {
+      for (var i = 0; i < film.count; i += step) if (order.indexOf(i) < 0) order.push(i);
+    });
+    if (order.indexOf(film.count - 1) < 0) order.push(film.count - 1);
+    var coarse = Math.ceil(film.count / 8);
+    var next = 0;
+
+    function pull() {
+      if (next >= order.length) return;
+      var i = order[next++];
+      var el = new Image();
+      var done = function () { film.ready++; pull(); };
+      el.onload = function () {
+        (el.decode ? el.decode() : Promise.resolve()).catch(function () {}).then(function () {
+          film.frames[i] = el;
+          if (film.ready + 1 >= coarse) film.coarse = true;
+          done();
+        });
+      };
+      el.onerror = done;
+      el.src = 'assets/seq/' + (small ? 'm' : 'd') + '/' + (i < 10 ? '0' : '') + i + '.webp';
+    }
+    for (var c = 0; c < 5; c++) pull();
+  }
+
+  function paintFilm(time, p) {
+    if (!film.count) return;
+    if (!film.live) {
+      if (!film.coarse || !film.frames[0] || root.classList.contains('is-loading')) return;
+      if (!film.born) film.born = time;
+      if (time - film.born < 1600) return;   /* let the photo finish its entrance */
+      film.live = true;
+      film.start = time;
+    }
+    var idle = (1 - Math.cos((time - film.start) / 6500 * Math.PI * 2)) / 2;
+    var pos = range(p, 0, 0.86) + idle * 0.14 * (1 - range(p, 0, 0.04));
+    var want = Math.round(clamp(pos) * (film.count - 1));
+    var best = want;
+    for (var d = 0; d < film.count; d++) {
+      if (film.frames[want - d]) { best = want - d; break; }
+      if (film.frames[want + d]) { best = want + d; break; }
+    }
+    if (best === film.shown || !film.frames[best]) return;
+    film.ctx.clearRect(0, 0, film.canvas.width, film.canvas.height);
+    film.ctx.drawImage(film.frames[best], 0, 0, film.canvas.width, film.canvas.height);
+    if (film.shown < 0) portrait.classList.add('has-film');
+    film.shown = best;
+  }
+
   /* The photo opens alone. Scrolling brings the copy in, holds, then pushes in. */
   var waiting = true;
   var counted = false;
@@ -481,6 +550,8 @@
         paintHero(heroP, handoff);
       }
 
+      if (y < travel + vh) paintFilm(time, heroP);
+
       /* Mouse depth: portrait and cards drift at different speeds */
       if (finePointer && !phone && y < travel) {
         depthX += (pointerX - depthX) * 0.07;
@@ -496,7 +567,7 @@
   }
 
   window.addEventListener('resize', function () { measure(); repaint = true; });
-  window.addEventListener('load', function () { measure(); repaint = true; });
+  window.addEventListener('load', function () { measure(); repaint = true; window.setTimeout(loadFilm, 200); });
   measure();
   window.requestAnimationFrame(frame);
 })();
