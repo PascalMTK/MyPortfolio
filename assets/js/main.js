@@ -181,7 +181,6 @@
       window.requestAnimationFrame(function () {
         window.requestAnimationFrame(function () {
           root.classList.remove('is-loading');
-          countUp();
         });
       });
       return;
@@ -200,7 +199,6 @@
         under.classList.add('is-done');
         window.setTimeout(function () {
           root.classList.remove('is-loading');
-          countUp();
         }, 420);
         window.setTimeout(function () {
           intro.classList.add('is-gone');
@@ -345,30 +343,58 @@
     return { el: el, img: el.querySelector('img') };
   });
 
+  var cue = $('cue');
+  var backdrop = document.querySelector('.stage__bg');
+
   var vh = window.innerHeight;
   var travel = 0;
   var maxScroll = 0;
   var phone = false;
+  var centerShift = 0;
 
   function measure() {
     vh = window.innerHeight;
     travel = stage.offsetHeight - vh;
     maxScroll = root.scrollHeight - vh;
     phone = window.innerWidth <= 760;
+    centerShift = window.innerWidth / 2 - (portrait.offsetLeft + portrait.offsetWidth / 2);
+  }
+
+  /* The photo opens alone. Scrolling brings the copy in, holds, then pushes in. */
+  var waiting = true;
+  var counted = false;
+  heroA.classList.add('is-waiting');
+  strip.classList.add('is-waiting');
+
+  function setWaiting(next) {
+    if (next === waiting) return;
+    waiting = next;
+    heroA.classList.toggle('is-waiting', next);
+    strip.classList.toggle('is-waiting', next);
+    if (!next && !counted) { counted = true; countUp(); }
   }
 
   function paintHero(p, handoff) {
-    var push = smooth(range(p, 0.06, 0.74));
-    var out = smooth(range(p, 0.02, 0.3));
-    var inn = smooth(range(p, 0.34, 0.66));
+    var slide = smooth(range(p, 0, 0.2));
+    var push = smooth(range(p, 0.4, 0.86));
+    var out = smooth(range(p, 0.42, 0.56));
+    var inn = smooth(range(p, 0.54, 0.76));
 
-    var scale = 1 + push * (phone ? 0.28 : 0.62);
-    var shiftX = push * (phone ? 0 : 7);
-    portrait.style.transform = 'translate3d(' + shiftX.toFixed(3) + 'vw,0,0) scale(' + scale.toFixed(4) + ')';
+    if (p > 0.05) setWaiting(false);
+    else if (p < 0.02) setWaiting(true);
+
+    var scale = (phone ? 1 + (1 - slide) * 0.3 : 1) * (1 + push * (phone ? 0.28 : 0.62));
+    var shiftPx = phone ? 0 : centerShift * (1 - slide);
+    var shiftVw = push * (phone ? 0 : 7);
+    portrait.style.transform = 'translate3d(calc(' + shiftPx.toFixed(1) + 'px + ' + shiftVw.toFixed(3) + 'vw),0,0) scale(' + scale.toFixed(4) + ')';
+    backdrop.style.transform = phone ? '' : 'translate3d(' + (-24 * (1 - slide)).toFixed(3) + 'vw,0,0)';
+    pin.style.setProperty('--scrim', slide.toFixed(3));
+
+    cue.style.opacity = (1 - range(p, 0, 0.03)).toFixed(3);
 
     heroA.style.opacity = (1 - out).toFixed(3);
     heroA.style.transform = 'translate3d(0,' + (-out * 44).toFixed(1) + 'px,0)';
-    heroA.style.visibility = out >= 0.999 ? 'hidden' : 'visible';
+    heroA.style.visibility = out >= 0.999 || (waiting && p < 0.02) ? 'hidden' : 'visible';
 
     heroB.style.opacity = inn.toFixed(3);
     heroB.style.transform = 'translate3d(0,' + ((1 - inn) * 44).toFixed(1) + 'px,0)';
@@ -434,8 +460,8 @@
       progress.style.transform = 'scaleX(' + (maxScroll > 0 ? clamp(y / maxScroll) : 0).toFixed(4) + ')';
 
       if (!links.classList.contains('is-open')) {
-        if (y > vh * 1.1 && delta > 3) nav.classList.add('is-hidden');
-        else if (delta < -3 || y <= vh * 1.1) nav.classList.remove('is-hidden');
+        if (y > travel && delta > 3) nav.classList.add('is-hidden');
+        else if (delta < -3 || y <= travel) nav.classList.remove('is-hidden');
       }
       if (!reduced) {
         handoff = clamp((y - travel) / (vh * 0.85));
@@ -456,7 +482,7 @@
       }
 
       /* Mouse depth: portrait and cards drift at different speeds */
-      if (finePointer && !phone && y < vh) {
+      if (finePointer && !phone && y < travel) {
         depthX += (pointerX - depthX) * 0.07;
         depthY += (pointerY - depthY) * 0.07;
         portrait.style.translate = (depthX * -22).toFixed(2) + 'px ' + (depthY * -10).toFixed(2) + 'px';

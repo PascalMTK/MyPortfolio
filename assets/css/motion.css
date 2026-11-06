@@ -219,3 +219,45 @@ html.lenis, html.lenis body { height: auto; }
   .intro-under { display: none !important; }
   .sw { opacity: 1; }
 }
+
+/* ---------- Opening shot: the photo alone, then scroll ---------- */
+.scroll-cue {
+  position: absolute; left: 50%; bottom: 24px; z-index: 3;
+  display: grid; justify-items: center; gap: 10px;
+  transform: translateX(-50%); pointer-events: none;
+  font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  text-shadow: 0 1px 12px rgba(11, 8, 16, .8);
+}
+.scroll-cue i { display: block; position: relative; width: 1.5px; height: 44px; overflow: hidden; background: rgba(255, 255, 255, .22); }
+.scroll-cue i::after {
+  content: ""; position: absolute; inset: 0; background: linear-gradient(transparent, #fff);
+  animation: cue 1.9s var(--ease-inout) infinite;
+}
+@keyframes cue { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+html.is-loading .scroll-cue { opacity: 0 !important; }
+.js .scroll-cue { transition: opacity .3s ease; }
+
+/* Copy waits for the first scroll, then stages itself */
+.hero.is-waiting { pointer-events: none; }
+.hero.is-waiting .line > span { transform: translateY(112%); }
+.hero.is-waiting .hero__hey, .hero.is-waiting .hero__line, .hero.is-waiting .hero__sub,
+.hero.is-waiting .hero__cta, .hero.is-waiting .stat, .strip.is-waiting li {
+  opacity: 0; transform: translateY(22px);
+}
+
+/* Backdrop travels with the photo, so it needs room on both sides */
+@media (min-width: 761px) {
+  .stage__bg {
+    left: -30%; right: -30%;
+    background:
+      radial-gradient(38% 75% at 65% 42%, rgba(240, 36, 95, .62), transparent 70%),
+      radial-gradient(30% 60% at 24% 96%, rgba(90, 47, 208, .55), transparent 72%),
+      radial-gradient(25% 50% at 81% 100%, rgba(255, 122, 69, .28), transparent 70%),
+      var(--bg);
+  }
+}
+.stage__pin::after { opacity: var(--scrim, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue { display: none; }
+}

@@ -6,6 +6,7 @@ window.PORTFOLIO_FR = {
 
   /* Navigation */
   'Skip to content': 'Aller au contenu',
+  'Scroll': 'Défiler',
   'About': 'À propos',
   'Projects': 'Projets',
   'Skills': 'Compétences',
