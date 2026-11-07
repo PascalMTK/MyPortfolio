@@ -332,6 +332,20 @@
     });
   }
 
+  /* Workflow film: loads and plays only while on screen */
+  var workflowFilm = $('workflowFilm');
+  if (workflowFilm && !reduced && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        workflowFilm.playbackRate = 0.75;
+        var play = workflowFilm.play();
+        if (play) play.catch(function () { /* the poster stays in place */ });
+      } else {
+        workflowFilm.pause();
+      }
+    }, { threshold: 0.2 }).observe(workflowFilm);
+  }
+
   /* ---------- Scroll stage ---------- */
   var stage = $('home');
   var pin = $('pin');

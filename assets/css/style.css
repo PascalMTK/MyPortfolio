@@ -255,6 +255,10 @@ h3 { font-weight: 700; }
 .skill h3 { font-size: 22px; margin: 4px 0 16px; }
 
 /* Workflow */
+.workflow__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 48px; align-items: center; margin-bottom: 56px; }
+.workflow__top .section__head { margin-bottom: 0; }
+.workflow__film { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: #2c1650; box-shadow: 0 24px 70px rgba(90, 47, 208, .28); }
+.workflow__film video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; counter-reset: s; }
 .flow li { padding-top: 20px; border-top: 2px solid var(--line); }
 .flow span { color: var(--accent); font-weight: 700; font-size: 18px; }
@@ -308,6 +312,8 @@ h3 { font-weight: 700; }
   .nav { padding-right: 6px; }
   .skills { grid-template-columns: repeat(2, 1fr); }
   .flow { grid-template-columns: repeat(2, 1fr); }
+  .workflow__top { grid-template-columns: 1fr; gap: 28px; margin-bottom: 40px; }
+  .workflow__film { max-width: 560px; }
   .hero__stats { flex-basis: 240px; }
   .strip li { font-size: 14px; padding: 20px 6px; }
   .strip b { font-size: 16px; display: block; margin: 0; }
