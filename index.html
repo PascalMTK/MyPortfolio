@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pascal Mutaka | Full Stack Software Engineer in Namibia</title>
   <meta name="description" content="Pascal Mutaka is a full stack software engineer in Windhoek, Namibia, building web platforms for payments, delivery, training, bookings and education.">
-  <meta name="theme-color" content="#0b0810">
+  <meta name="theme-color" content="#f6f1e7">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pascal Mutaka | Full Stack Software Engineer">
   <meta property="og:description" content="Web platforms for payments, delivery, training, bookings and education, built in Windhoek, Namibia.">
@@ -14,20 +14,23 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/img/portrait.webp" imagesrcset="assets/img/portrait.webp 1152w, assets/img/portrait-1800.webp 1800w, assets/img/portrait-4k.webp 2765w" imagesizes="(max-width: 760px) 90vw, 110vh">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/motion.css">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>
+    document.documentElement.classList.add('js');
+    try { var th = localStorage.getItem('theme'); if (th === 'dark' || th === 'light') document.documentElement.setAttribute('data-theme', th); } catch (e) {}
+  </script>
 </head>
 <body>
-  <a class="skip" href="#about">Skip to content</a>
-  <div class="intro-under" id="introUnder" aria-hidden="true"></div>
-  <div class="intro" id="intro" aria-hidden="true"><div class="intro__mark"><img src="assets/img/favicon.svg" width="44" height="44" alt=""><span class="intro__name">Pascal Mutaka</span></div><div class="intro__bar"><i></i></div></div>
+  <a class="skip" href="#book">Skip to content</a>
   <div class="progress" id="progress" aria-hidden="true"></div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 18 9 12l6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.970 5.700a1.940 1.940 0 0 1-2.060 0L2 7"/></g></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M22 16.920v3a2 2 0 0 1-2.180 2 19.790 19.790 0 0 1-8.630-3.070 19.500 19.500 0 0 1-6-6 19.790 19.790 0 0 1-3.070-8.670A2 2 0 0 1 4.110 2h3a2 2 0 0 1 2 1.720 12.840 12.840 0 0 0 .7 2.810 2 2 0 0 1-.45 2.110L8.090 9.910a16 16 0 0 0 6 6l1.270-1.270a2 2 0 0 1 2.110-.45 12.840 12.840 0 0 0 2.810.7A2 2 0 0 1 22 16.920z"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
@@ -38,7 +41,7 @@
 
   <header class="nav" id="nav">
     <a class="brand" href="#home" aria-label="Pascal Mutaka, back to top">
-      <img src="assets/img/favicon.svg" width="30" height="30" alt="">
+      <img src="assets/img/favicon.svg" width="28" height="28" alt="">
       <span>Pascal Mutaka</span>
     </a>
     <nav class="nav__links" id="navLinks" aria-label="Main">
@@ -53,265 +56,369 @@
         <button type="button" data-lang="en" aria-pressed="true" lang="en" title="English">EN</button>
         <button type="button" data-lang="fr" aria-pressed="false" lang="fr" title="Français">FR</button>
       </div>
-      <a class="pill-btn pill-btn--sm" href="#contact">Let's connect <span class="pill-btn__dot"><svg width="14" height="14" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch theme">
+        <svg class="i-sun" width="18" height="18" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="i-moon" width="18" height="18" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
       <button class="nav__toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
     </div>
   </header>
 
   <main>
-    <section class="stage" id="home" aria-label="Introduction">
-      <div class="stage__pin" id="pin">
-        <div class="stage__bg" aria-hidden="true"></div>
-        <div class="stage__portrait" id="portrait">
-          <img src="assets/img/portrait.webp" srcset="assets/img/portrait.webp 1152w, assets/img/portrait-1800.webp 1800w, assets/img/portrait-4k.webp 2765w" sizes="(max-width: 760px) 90vw, 110vh" width="2765" height="3840" alt="Portrait of Pascal Mutaka in a grey blazer and white shirt" fetchpriority="high">
-        </div>
-        <div class="stage__scrim" id="scrim" aria-hidden="true"></div>
-
-        <div class="hero" id="heroA">
-          <div class="hero__copy">
-            <p class="hero__hey">Hey, I'm Pascal</p>
-            <h1><span class="line"><span>Full Stack</span></span><span class="line"><span>Engineer</span></span></h1>
-            <p class="hero__line">Software should <em>solve the problem.</em></p>
-            <p class="hero__sub">I build web platforms for payments, delivery, training and bookings, from Windhoek, Namibia.</p>
-            <div class="hero__cta">
-              <a class="pill-btn" href="#projects">See my work <span class="pill-btn__dot"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-              <span class="status"><i aria-hidden="true"></i>Open to work</span>
-            </div>
+    <!-- Hero -->
+    <section class="hero" id="home" aria-label="Introduction">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="kick">Hey, I'm Pascal</p>
+          <h1><span>Full Stack</span> <span class="hl">Engineer</span></h1>
+          <p class="hero__line">Software should <em>solve the problem.</em></p>
+          <p class="hero__sub">I build web platforms for payments, delivery, training and bookings, from Windhoek, Namibia.</p>
+          <div class="hero__cta">
+            <a class="btn btn--pri" href="#book">Open my book <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <span class="status"><i aria-hidden="true"></i>Open to work</span>
           </div>
-          <dl class="hero__stats">
-            <div class="glass stat stat--wide"><dt>Live in production</dt><dd>5</dd></div>
-            <div class="glass stat"><dt>Featured projects</dt><dd>6</dd></div>
-            <div class="glass stat"><dt>Commits on these projects</dt><dd>300+</dd></div>
-          </dl>
+          <ol class="strip" aria-label="What I do">
+            <li><b>#01</b> Full Stack Web Apps</li>
+            <li><b>#02</b> Payments &amp; Dashboards</li>
+            <li><b>#03</b> Real Time Systems</li>
+            <li><b>#04</b> AI Integration</li>
+          </ol>
         </div>
-
-        <div class="hero-b" id="heroB">
-          <p class="hero__hey">Behind the code</p>
-          <p class="hero-b__title">From a first idea to a live product people use.</p>
-          <p class="hero__sub">Design, database, backend, frontend and deployment. I care about all of it, because users feel all of it.</p>
-          <a class="pill-btn" href="#about">Get to know me <span class="pill-btn__dot"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-        </div>
-
-        <div class="scroll-cue" id="cue" aria-hidden="true"><span>Scroll</span><i></i></div>
-
-        <ol class="strip" id="strip" aria-label="What I do">
-          <li><b>#01</b> Full Stack Web Apps</li>
-          <li><b>#02</b> Payments &amp; Dashboards</li>
-          <li><b>#03</b> Real Time Systems</li>
-          <li><b>#04</b> AI Integration</li>
-        </ol>
+        <figure class="photo">
+          <span class="photo__tape" aria-hidden="true"></span>
+          <img src="assets/img/portrait.webp" srcset="assets/img/portrait.webp 1152w, assets/img/portrait-1800.webp 1800w, assets/img/portrait-4k.webp 2765w" sizes="(max-width: 900px) 80vw, 36vw" width="2765" height="3840" alt="Portrait of Pascal Mutaka in a grey blazer and white shirt" fetchpriority="high">
+          <figcaption class="mono">Windhoek, Namibia</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="section about" id="about">
-      <div class="wrap about__grid">
-        <div class="reveal">
-          <p class="eyebrow">About me</p>
-          <h2>I build for the problems around me.</h2>
-        </div>
-        <div class="about__text reveal">
-          <p class="lead">I'm Pascal Mutaka, a full stack software engineer based in Windhoek, Namibia.</p>
-          <p>Most of my work starts with something ordinary that should be easier: sending money across borders, getting a parcel delivered, proving a training certificate is real, waiting for a haircut without losing your afternoon, or helping a child hear their own language in a game.</p>
-          <p>I like the whole journey. I model the data, write the rules, design the screens and put the product online. I care about clean architecture and careful UX, and I keep learning new tools because each project asks for something different.</p>
-          <ul class="facts">
-            <li><svg width="18" height="18" aria-hidden="true"><use href="#i-pin"/></svg>Windhoek, Namibia</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <!-- The book: each leaf holds a right-hand page (front) and the next left-hand page (back) -->
+    <section class="book-sec" id="book" aria-label="Book">
+      <div class="book-sec__pin">
+        <div class="book" id="bookEl">
 
-    <section class="section" id="projects">
-      <div class="wrap">
-        <div class="section__head reveal">
-          <p class="eyebrow">Selected work</p>
-          <h2>Six projects, six real problems.</h2>
-        </div>
-
-        <article class="project">
-          <figure class="shot reveal">
-            <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>riderafrica.com</span></div>
-            <img src="assets/img/rider.webp" width="1280" height="800" loading="lazy" alt="Rider Africa home page with the headline We bring what you need to your door">
-          </figure>
-          <div class="project__body reveal">
-            <p class="project__meta"><b>#01</b> Delivery platform <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
-            <h3>Rider Africa</h3>
-            <p>One website to send a parcel, book a ride, shop for groceries or pawn an item, with a single account and cart. Once an order is paid, a driver is assigned and the customer follows the delivery on a live map.</p>
-            <ul class="points">
-              <li>Separate secure logins for customers, drivers and admins</li>
-              <li>Card payments through DPO, plus bank transfer with proof of payment</li>
-              <li>Live driver location on a map, from checkout to the door</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>TypeScript</li><li>Firebase</li><li>Leaflet</li><li>DPO Group</li></ul>
-            <p class="project__role">Built with Datalani Technology</p>
-            <div class="links"><a href="https://www.riderafrica.com" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <!-- Leaf 1 -->
+          <div class="leaf">
+            <article class="page front cover" data-page="0">
+              <div class="cover__in">
+                <img src="assets/img/favicon.svg" width="56" height="56" alt="">
+                <p class="mono cover__kick">Pascal Mutaka</p>
+                <p class="cover__title">Full Stack Engineer</p>
+                <p class="cover__sub">A book of problems solved</p>
+                <p class="mono cover__hint">Turn the page</p>
+              </div>
+            </article>
+            <article class="page back" data-page="1">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p class="kick">Contents</p>
+              <ol class="toc">
+                <li><a href="#about"><b>01</b><span>About me</span><i></i><em>2</em></a></li>
+                <li><a href="#projects"><b>02</b><span>Selected work</span><i></i><em>4</em></a></li>
+                <li><a href="#also"><b>03</b><span>Also built</span><i></i><em>17</em></a></li>
+                <li><a href="#skills"><b>04</b><span>Skills</span><i></i><em>18</em></a></li>
+                <li><a href="#workflow"><b>05</b><span>Workflow</span><i></i><em>19</em></a></li>
+                <li><a href="#contact"><b>06</b><span>Contact</span><i></i><em>21</em></a></li>
+              </ol>
+              <p class="note">Scroll to turn the pages, or use the arrows.</p>
+              <p class="pn mono">1</p>
+            </article>
           </div>
-        </article>
 
-        <article class="project">
-          <figure class="shot reveal">
-            <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>pascal02.pythonanywhere.com</span></div>
-            <img src="assets/img/bluesky.webp" width="1280" height="800" loading="lazy" alt="BlueSky Transactions landing page in French for sending money across Africa">
-          </figure>
-          <div class="project__body reveal">
-            <p class="project__meta"><b>#02</b> Fintech operations <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
-            <h3>BlueSky Transactions</h3>
-            <p>A platform for running international money transfers across African countries. Agents record and track each transaction, while the admin watches all activity from one dashboard.</p>
-            <ul class="points">
-              <li>Fees calculated automatically from a percentage set per country</li>
-              <li>Monthly charts, top agents, printable receipts and Excel export</li>
-              <li>French and English interface, with dark and light modes</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies"><li>Python</li><li>Django</li><li>MySQL</li><li>Chart.js</li></ul>
-            <p class="project__role">Solo project, 144 commits</p>
-            <div class="links">
-              <a href="https://pascal02.pythonanywhere.com" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            </div>
+          <!-- Leaf 2 -->
+          <div class="leaf">
+            <article class="page front" id="about" data-page="2">
+              <p class="rh mono">Chapter 01</p>
+              <p class="kick">About me</p>
+              <h2>I build for the problems around me.</h2>
+              <p class="lead">I'm Pascal Mutaka, a full stack software engineer based in Windhoek, Namibia.</p>
+              <p>Most of my work starts with something ordinary that should be easier: sending money across borders, getting a parcel delivered, proving a training certificate is real, waiting for a haircut without losing your afternoon, or helping a child hear their own language in a game.</p>
+              <p class="pn mono">2</p>
+            </article>
+            <article class="page back" data-page="3">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p>I like the whole journey. I model the data, write the rules, design the screens and put the product online. I care about clean architecture and careful UX, and I keep learning new tools because each project asks for something different.</p>
+              <dl class="stats">
+                <div class="stat stat--wide"><dt>Live in production</dt><dd>5</dd></div>
+                <div class="stat"><dt>Featured projects</dt><dd>6</dd></div>
+                <div class="stat"><dt>Commits on these projects</dt><dd>300+</dd></div>
+              </dl>
+              <p class="fact"><svg width="16" height="16" aria-hidden="true"><use href="#i-pin"/></svg>Windhoek, Namibia</p>
+              <p class="pn mono">3</p>
+            </article>
           </div>
-        </article>
 
-        <article class="project">
-          <figure class="shot reveal">
-            <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>bluescapetraining.com</span></div>
-            <img src="assets/img/bluescape.webp" width="1280" height="800" loading="lazy" alt="Bluescape Training Consultancy home page with the headline Where Skills Become Opportunity">
-          </figure>
-          <div class="project__body reveal">
-            <p class="project__meta"><b>#03</b> Training management <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
-            <h3>Bluescape Training</h3>
-            <p>A training platform for individuals, organisations and administrators. People can browse courses, enrol and earn certificates, and anyone can verify a certificate publicly.</p>
-            <ul class="points">
-              <li>44 screens across public, student, organisation and admin areas</li>
-              <li>Certificates with unique IDs and public verification</li>
-              <li>Organisation accounts with bulk employee upload</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies"><li>React</li><li>Tailwind CSS</li><li>Laravel</li><li>MySQL</li><li>JWT</li></ul>
-            <p class="project__role">Built with Datalani Technology</p>
-            <div class="links"><a href="https://bluescapetraining.com/public/" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <!-- Leaf 3 -->
+          <div class="leaf">
+            <article class="page front opener" id="projects" data-page="4">
+              <p class="rh mono">Chapter 02</p>
+              <p class="kick">Selected work</p>
+              <h2>Six projects, six real problems.</h2>
+              <p class="mono opener__label">In this chapter</p>
+              <ol class="toc toc--sm">
+                <li><a href="#p-rider"><b>#01</b><span>Rider Africa</span><i></i><em>5</em></a></li>
+                <li><a href="#p-bluesky"><b>#02</b><span>BlueSky Transactions</span><i></i><em>7</em></a></li>
+                <li><a href="#p-bluescape"><b>#03</b><span>Bluescape Training</span><i></i><em>9</em></a></li>
+                <li><a href="#p-smartcut"><b>#04</b><span>Smart Cut Barbershop</span><i></i><em>11</em></a></li>
+                <li><a href="#p-esell"><b>#05</b><span>E-Sell Namibia</span><i></i><em>13</em></a></li>
+                <li><a href="#p-microwide"><b>#06</b><span>Microwide Kids</span><i></i><em>15</em></a></li>
+              </ol>
+              <p class="pn mono">4</p>
+            </article>
+            <article class="page back pj" id="p-rider" data-page="5">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p class="pj__meta"><b>#01</b> Delivery platform <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
+              <h3>Rider Africa</h3>
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>riderafrica.com</span></div>
+                <img src="assets/img/rider.webp" width="1280" height="800" loading="lazy" alt="Rider Africa home page with the headline We bring what you need to your door">
+              </figure>
+              <p class="pj__role">Built with Datalani Technology</p>
+              <p class="pn mono">5</p>
+            </article>
           </div>
-        </article>
 
-        <article class="project">
-          <figure class="shot reveal">
-            <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>booking-barbershop-system-pascal-code.vercel.app</span></div>
-            <img src="assets/img/smartcut.webp" width="1280" height="800" loading="lazy" alt="Smart Cut Barbershop home page with the headline Join the queue from your phone and a live queue status">
-          </figure>
-          <div class="project__body reveal">
-            <p class="project__meta"><b>#04</b> Live queue system <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
-            <h3>Smart Cut Barbershop</h3>
-            <p>A first come, first served queue for a barbershop. Customers reserve a place, check in on arrival, step away for a moment and watch their position update, while the barber runs the queue from the same app.</p>
-            <ul class="points">
-              <li>Queue rules and an audit log enforced inside Postgres</li>
-              <li>One place per person, even across several name-only sign-ups</li>
-              <li>Available in English, French and Portuguese</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>TypeScript</li><li>PostgreSQL</li><li>Neon</li><li>Vercel</li></ul>
-            <p class="project__role">Solo project</p>
-            <div class="links"><a href="https://booking-barbershop-system-pascal-code.vercel.app/" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <!-- Leaf 4 -->
+          <div class="leaf">
+            <article class="page front pj-r" data-page="6">
+              <p class="rh mono">Chapter 02</p>
+              <p>One website to send a parcel, book a ride, shop for groceries or pawn an item, with a single account and cart. Once an order is paid, a driver is assigned and the customer follows the delivery on a live map.</p>
+              <ul class="points">
+                <li>Separate secure logins for customers, drivers and admins</li>
+                <li>Card payments through DPO, plus bank transfer with proof of payment</li>
+                <li>Live driver location on a map, from checkout to the door</li>
+              </ul>
+              <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>TypeScript</li><li>Firebase</li><li>Leaflet</li><li>DPO Group</li></ul>
+              <a class="link" href="https://www.riderafrica.com" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <p class="pn mono">6</p>
+            </article>
+            <article class="page back pj" id="p-bluesky" data-page="7">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p class="pj__meta"><b>#02</b> Fintech operations <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
+              <h3>BlueSky Transactions</h3>
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>pascal02.pythonanywhere.com</span></div>
+                <img src="assets/img/bluesky.webp" width="1280" height="800" loading="lazy" alt="BlueSky Transactions landing page in French for sending money across Africa">
+              </figure>
+              <p class="pj__role">Solo project, 144 commits</p>
+              <p class="pn mono">7</p>
+            </article>
           </div>
-        </article>
 
-        <article class="project">
-          <figure class="shot reveal">
-            <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>E-Sell Namibia</span></div>
-            <img src="assets/img/esell.webp" width="1280" height="800" loading="lazy" alt="E-Sell Namibia home page design with the headline Good finds, great possibilities">
-          </figure>
-          <div class="project__body reveal">
-            <p class="project__meta"><b>#05</b> Marketplace</p>
-            <h3>E-Sell Namibia</h3>
-            <p>A buying and selling platform built around trust. Only E-Sell administrators publish products. Customers submit sell requests, and the team reviews each one before turning it into a full listing.</p>
-            <ul class="points">
-              <li>Sell request workflow from submission to published listing</li>
-              <li>Customer and admin roles with secure sessions</li>
-              <li>Editable site settings, team pages and banners from the admin</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>TypeScript</li><li>Prisma</li><li>PostgreSQL</li><li>Auth.js</li></ul>
-            <p class="project__role">Solo project</p>
+          <!-- Leaf 5 -->
+          <div class="leaf">
+            <article class="page front pj-r" data-page="8">
+              <p class="rh mono">Chapter 02</p>
+              <p>A platform for running international money transfers across African countries. Agents record and track each transaction, while the admin watches all activity from one dashboard.</p>
+              <ul class="points">
+                <li>Fees calculated automatically from a percentage set per country</li>
+                <li>Monthly charts, top agents, printable receipts and Excel export</li>
+                <li>French and English interface, with dark and light modes</li>
+              </ul>
+              <ul class="chips" aria-label="Technologies"><li>Python</li><li>Django</li><li>MySQL</li><li>Chart.js</li></ul>
+              <a class="link" href="https://pascal02.pythonanywhere.com" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <p class="pn mono">8</p>
+            </article>
+            <article class="page back pj" id="p-bluescape" data-page="9">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p class="pj__meta"><b>#03</b> Training management <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
+              <h3>Bluescape Training</h3>
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>bluescapetraining.com</span></div>
+                <img src="assets/img/bluescape.webp" width="1280" height="800" loading="lazy" alt="Bluescape Training Consultancy home page with the headline Where Skills Become Opportunity">
+              </figure>
+              <p class="pj__role">Built with Datalani Technology</p>
+              <p class="pn mono">9</p>
+            </article>
           </div>
-        </article>
 
-        <article class="project">
-          <figure class="shot reveal">
-            <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.oryxai.win</span></div>
-            <img src="assets/img/microwide.webp" width="1280" height="800" loading="lazy" alt="Microwide Kids screen where a child chooses Oshiwambo or Otjiherero, with Oryx the mascot">
-          </figure>
-          <div class="project__body reveal">
-            <p class="project__meta"><b>#06</b> AI education game <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
-            <h3>Microwide Kids</h3>
-            <p>An AI language game that helps Namibian children aged 3 to 10 learn Oshiwambo and Otjiherero through play, built for the Microwide Kids AI Challenge. Every word comes from a real recording, never from AI.</p>
-            <ul class="points">
-              <li>Children say a word aloud and Oryx checks it with speech recognition</li>
-              <li>Word cards, quizzes, matching, memory and spelling games</li>
-              <li>73 words and phrases in two Namibian languages</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>Django</li><li>OpenAI Whisper</li><li>Tailwind CSS</li></ul>
-            <p class="project__role">Team project with Team Vortex</p>
-            <div class="links"><a href="https://app.oryxai.win/" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <!-- Leaf 6 -->
+          <div class="leaf">
+            <article class="page front pj-r" data-page="10">
+              <p class="rh mono">Chapter 02</p>
+              <p>A training platform for individuals, organisations and administrators. People can browse courses, enrol and earn certificates, and anyone can verify a certificate publicly.</p>
+              <ul class="points">
+                <li>44 screens across public, student, organisation and admin areas</li>
+                <li>Certificates with unique IDs and public verification</li>
+                <li>Organisation accounts with bulk employee upload</li>
+              </ul>
+              <ul class="chips" aria-label="Technologies"><li>React</li><li>Tailwind CSS</li><li>Laravel</li><li>MySQL</li><li>JWT</li></ul>
+              <a class="link" href="https://bluescapetraining.com/public/" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <p class="pn mono">10</p>
+            </article>
+            <article class="page back pj" id="p-smartcut" data-page="11">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p class="pj__meta"><b>#04</b> Live queue system <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
+              <h3>Smart Cut Barbershop</h3>
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>booking-barbershop-system-pascal-code.vercel.app</span></div>
+                <img src="assets/img/smartcut.webp" width="1280" height="800" loading="lazy" alt="Smart Cut Barbershop home page with the headline Join the queue from your phone and a live queue status">
+              </figure>
+              <p class="pj__role">Solo project</p>
+              <p class="pn mono">11</p>
+            </article>
           </div>
-        </article>
 
-        <div class="more reveal">
-          <h3>Also built</h3>
-          <ul>
-            <li><div class="more__row"><b>NUST Electronic Voting</b><span>A JavaFX and MySQL desktop app for student elections, with one vote per student per election.</span></div></li>
-            <li><div class="more__row"><b>Blue Sky Website</b><span>A marketing site and customer portal for a money transfer agency, built with Next.js and Prisma.</span></div></li>
-          </ul>
+          <!-- Leaf 7 -->
+          <div class="leaf">
+            <article class="page front pj-r" data-page="12">
+              <p class="rh mono">Chapter 02</p>
+              <p>A first come, first served queue for a barbershop. Customers reserve a place, check in on arrival, step away for a moment and watch their position update, while the barber runs the queue from the same app.</p>
+              <ul class="points">
+                <li>Queue rules and an audit log enforced inside Postgres</li>
+                <li>One place per person, even across several name-only sign-ups</li>
+                <li>Available in English, French and Portuguese</li>
+              </ul>
+              <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>TypeScript</li><li>PostgreSQL</li><li>Neon</li><li>Vercel</li></ul>
+              <a class="link" href="https://booking-barbershop-system-pascal-code.vercel.app/" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <p class="pn mono">12</p>
+            </article>
+            <article class="page back pj" id="p-esell" data-page="13">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p class="pj__meta"><b>#05</b> Marketplace</p>
+              <h3>E-Sell Namibia</h3>
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>E-Sell Namibia</span></div>
+                <img src="assets/img/esell.webp" width="1280" height="800" loading="lazy" alt="E-Sell Namibia home page design with the headline Good finds, great possibilities">
+              </figure>
+              <p class="pj__role">Solo project</p>
+              <p class="pn mono">13</p>
+            </article>
+          </div>
+
+          <!-- Leaf 8 -->
+          <div class="leaf">
+            <article class="page front pj-r" data-page="14">
+              <p class="rh mono">Chapter 02</p>
+              <p>A buying and selling platform built around trust. Only E-Sell administrators publish products. Customers submit sell requests, and the team reviews each one before turning it into a full listing.</p>
+              <ul class="points">
+                <li>Sell request workflow from submission to published listing</li>
+                <li>Customer and admin roles with secure sessions</li>
+                <li>Editable site settings, team pages and banners from the admin</li>
+              </ul>
+              <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>TypeScript</li><li>Prisma</li><li>PostgreSQL</li><li>Auth.js</li></ul>
+              <p class="pn mono">14</p>
+            </article>
+            <article class="page back pj" id="p-microwide" data-page="15">
+              <p class="rh mono">Pascal Mutaka</p>
+              <p class="pj__meta"><b>#06</b> AI education game <span class="tag tag--live"><i aria-hidden="true"></i>Live</span></p>
+              <h3>Microwide Kids</h3>
+              <figure class="shot">
+                <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>app.oryxai.win</span></div>
+                <img src="assets/img/microwide.webp" width="1280" height="800" loading="lazy" alt="Microwide Kids screen where a child chooses Oshiwambo or Otjiherero, with Oryx the mascot">
+              </figure>
+              <p class="pj__role">Team project with Team Vortex</p>
+              <p class="pn mono">15</p>
+            </article>
+          </div>
+
+          <!-- Leaf 9 -->
+          <div class="leaf">
+            <article class="page front pj-r" data-page="16">
+              <p class="rh mono">Chapter 02</p>
+              <p>An AI language game that helps Namibian children aged 3 to 10 learn Oshiwambo and Otjiherero through play, built for the Microwide Kids AI Challenge. Every word comes from a real recording, never from AI.</p>
+              <ul class="points">
+                <li>Children say a word aloud and Oryx checks it with speech recognition</li>
+                <li>Word cards, quizzes, matching, memory and spelling games</li>
+                <li>73 words and phrases in two Namibian languages</li>
+              </ul>
+              <ul class="chips" aria-label="Technologies"><li>Next.js</li><li>Django</li><li>OpenAI Whisper</li><li>Tailwind CSS</li></ul>
+              <a class="link" href="https://app.oryxai.win/" target="_blank" rel="noopener">Visit live site <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <p class="pn mono">16</p>
+            </article>
+            <article class="page back" id="also" data-page="17">
+              <p class="rh mono">Chapter 03</p>
+              <p class="kick">Also built</p>
+              <ul class="more">
+                <li><b>NUST Electronic Voting</b><span>A JavaFX and MySQL desktop app for student elections, with one vote per student per election.</span></li>
+                <li><b>Blue Sky Website</b><span>A marketing site and customer portal for a money transfer agency, built with Next.js and Prisma.</span></li>
+              </ul>
+              <p class="pn mono">17</p>
+            </article>
+          </div>
+
+          <!-- Leaf 10 -->
+          <div class="leaf">
+            <article class="page front" id="skills" data-page="18">
+              <p class="rh mono">Chapter 04</p>
+              <p class="kick">Skills</p>
+              <h2>The tools I reach for.</h2>
+              <div class="skills">
+                <div class="grp"><p class="grp__h"><b>#01</b> Frontend</p><ul class="chips"><li>Next.js</li><li>React</li><li>TypeScript</li><li>JavaScript</li><li>Tailwind CSS</li><li>HTML &amp; CSS</li></ul></div>
+                <div class="grp"><p class="grp__h"><b>#02</b> Backend</p><ul class="chips"><li>Python</li><li>Django</li><li>PHP</li><li>Laravel</li><li>Node.js</li><li>Java</li></ul></div>
+                <div class="grp"><p class="grp__h"><b>#03</b> Data</p><ul class="chips"><li>PostgreSQL</li><li>MySQL</li><li>Firebase</li><li>Prisma</li><li>SQLite</li><li>MongoDB</li></ul></div>
+                <div class="grp"><p class="grp__h"><b>#04</b> Tools</p><ul class="chips"><li>Git</li><li>Docker</li><li>Vercel</li><li>Figma</li><li>Postman</li><li>OpenAI APIs</li></ul></div>
+              </div>
+              <p class="pn mono">18</p>
+            </article>
+            <article class="page back" id="workflow" data-page="19">
+              <p class="rh mono">Chapter 05</p>
+              <p class="kick">Workflow</p>
+              <h2>How I take a project from idea to live.</h2>
+              <figure class="film" aria-hidden="true">
+                <video id="workflowFilm" poster="assets/video/workflow-poster.webp" width="960" height="720" muted loop playsinline preload="none"><source src="assets/video/workflow.mp4" type="video/mp4"></video>
+              </figure>
+              <p class="pn mono">19</p>
+            </article>
+          </div>
+
+          <!-- Leaf 11 -->
+          <div class="leaf">
+            <article class="page front" data-page="20">
+              <p class="rh mono">Chapter 05</p>
+              <ol class="flow">
+                <li><span>#01</span><h3>Understand</h3><p>I start with who uses it and what goes wrong for them today.</p></li>
+                <li><span>#02</span><h3>Model the rules</h3><p>I design the data and business rules first, so the system stays correct as it grows.</p></li>
+                <li><span>#03</span><h3>Build in steps</h3><p>I ship small working pieces, test them and adjust from real feedback.</p></li>
+                <li><span>#04</span><h3>Launch and improve</h3><p>I deploy, watch how it behaves and keep making it better.</p></li>
+              </ol>
+              <blockquote class="quote">
+                <p>First, solve the problem. Then, write the code.</p>
+                <cite>John Johnson</cite>
+              </blockquote>
+              <p class="pn mono">20</p>
+            </article>
+            <article class="page back" id="contact" data-page="21">
+              <p class="rh mono">Chapter 06</p>
+              <p class="kick">Contact</p>
+              <h2>Have a problem worth solving?</h2>
+              <p class="lead">I'm open to full stack roles and freelance projects. Tell me what you're building.</p>
+              <ul class="crow">
+                <li><a href="mailto:pascalmutaka99@gmail.com"><svg width="18" height="18" aria-hidden="true"><use href="#i-mail"/></svg>pascalmutaka99@gmail.com</a></li>
+                <li><a href="tel:+264812682589"><svg width="18" height="18" aria-hidden="true"><use href="#i-phone"/></svg>+264 81 268 2589</a></li>
+                <li><a href="https://www.linkedin.com/in/pascal-mutaka-17a442379/" target="_blank" rel="noopener"><svg width="18" height="18" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a></li>
+                <li><a href="https://www.facebook.com/profile.php?id=61579737223053" target="_blank" rel="noopener"><svg width="18" height="18" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook</a></li>
+              </ul>
+              <a class="btn btn--pri" href="mailto:pascalmutaka99@gmail.com">Email me <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <p class="pn mono">21</p>
+            </article>
+          </div>
+
+          <!-- Leaf 12 -->
+          <div class="leaf">
+            <article class="page front the-end" data-page="22">
+              <p class="rh mono">Pascal Mutaka</p>
+              <div class="the-end__in">
+                <p class="the-end__t">The end</p>
+                <p>Thank you for reading.</p>
+                <a class="btn" href="#book" data-cover>Back to the cover <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+              <p class="pn mono">22</p>
+            </article>
+            <article class="page back cover cover--back" data-page="23">
+              <div class="cover__in">
+                <img src="assets/img/favicon.svg" width="40" height="40" alt="">
+                <p class="cover__sub">Written and built in Windhoek, Namibia.</p>
+                <a class="mono cover__gh" href="https://github.com/PascalMTK" target="_blank" rel="noopener"><svg width="16" height="16" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+              </div>
+            </article>
+          </div>
+
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="skills">
-      <div class="wrap">
-        <div class="section__head reveal">
-          <p class="eyebrow">Skills</p>
-          <h2>The tools I reach for.</h2>
-        </div>
-        <div class="skills">
-          <div class="glass skill reveal"><p class="skill__n">#01</p><h3>Frontend</h3><ul class="chips"><li>Next.js</li><li>React</li><li>TypeScript</li><li>JavaScript</li><li>Tailwind CSS</li><li>HTML &amp; CSS</li></ul></div>
-          <div class="glass skill reveal"><p class="skill__n">#02</p><h3>Backend</h3><ul class="chips"><li>Python</li><li>Django</li><li>PHP</li><li>Laravel</li><li>Node.js</li><li>Java</li></ul></div>
-          <div class="glass skill reveal"><p class="skill__n">#03</p><h3>Data</h3><ul class="chips"><li>PostgreSQL</li><li>MySQL</li><li>Firebase</li><li>Prisma</li><li>SQLite</li><li>MongoDB</li></ul></div>
-          <div class="glass skill reveal"><p class="skill__n">#04</p><h3>Tools</h3><ul class="chips"><li>Git</li><li>Docker</li><li>Vercel</li><li>Figma</li><li>Postman</li><li>OpenAI APIs</li></ul></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="workflow">
-      <div class="wrap">
-        <div class="workflow__top">
-          <div class="section__head reveal">
-            <p class="eyebrow">Workflow</p>
-            <h2>How I take a project from idea to live.</h2>
-          </div>
-          <figure class="workflow__film reveal" aria-hidden="true">
-            <video id="workflowFilm" poster="assets/video/workflow-poster.webp" width="960" height="720" muted loop playsinline preload="none"><source src="assets/video/workflow.mp4" type="video/mp4"></video>
-          </figure>
-        </div>
-        <ol class="flow">
-          <li class="reveal"><span>#01</span><h3>Understand</h3><p>I start with who uses it and what goes wrong for them today.</p></li>
-          <li class="reveal"><span>#02</span><h3>Model the rules</h3><p>I design the data and business rules first, so the system stays correct as it grows.</p></li>
-          <li class="reveal"><span>#03</span><h3>Build in steps</h3><p>I ship small working pieces, test them and adjust from real feedback.</p></li>
-          <li class="reveal"><span>#04</span><h3>Launch and improve</h3><p>I deploy, watch how it behaves and keep making it better.</p></li>
-        </ol>
-        <blockquote class="quote reveal">
-          <p>First, solve the problem. Then, write the code.</p>
-          <cite>John Johnson</cite>
-        </blockquote>
-      </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div class="wrap">
-        <div class="glass contact__card reveal">
-          <p class="eyebrow">Contact</p>
-          <h2>Have a problem worth solving?</h2>
-          <p class="contact__sub">I'm open to full stack roles and freelance projects. Tell me what you're building.</p>
-          <a class="pill-btn" href="mailto:pascalmutaka99@gmail.com">Email me <span class="pill-btn__dot"><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-          <ul class="contact__list">
-            <li><a href="mailto:pascalmutaka99@gmail.com"><svg width="20" height="20" aria-hidden="true"><use href="#i-mail"/></svg>pascalmutaka99@gmail.com</a></li>
-            <li><a href="tel:+264812682589"><svg width="20" height="20" aria-hidden="true"><use href="#i-phone"/></svg>+264 81 268 2589</a></li>
-          </ul>
-          <ul class="social">
-            <li><a href="https://www.linkedin.com/in/pascal-mutaka-17a442379/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="22" height="22" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
-            <li><a href="https://www.facebook.com/profile.php?id=61579737223053" target="_blank" rel="noopener" aria-label="Facebook"><svg width="22" height="22" aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
-          </ul>
+        <div class="book-ctl" id="bookCtl">
+          <button type="button" class="icon-btn" id="prevPage" aria-label="Previous page"><svg width="18" height="18" aria-hidden="true"><use href="#i-left"/></svg></button>
+          <span class="mono book-ctl__n" id="pageNum" aria-live="polite">00 / 12</span>
+          <button type="button" class="icon-btn" id="nextPage" aria-label="Next page"><svg width="18" height="18" aria-hidden="true"><use href="#i-right"/></svg></button>
         </div>
       </div>
     </section>

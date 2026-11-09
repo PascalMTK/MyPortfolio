@@ -132,5 +132,28 @@ window.PORTFOLIO_FR = {
   /* Contact */
   'Have a problem worth solving?': 'Un problème qui mérite d\'être résolu ?',
   "I'm open to full stack roles and freelance projects. Tell me what you're building.": 'Je suis ouvert aux postes full stack et aux missions freelance. Parlez-moi de votre projet.',
-  'Email me': 'M\'écrire'
+  'Email me': 'M\'écrire',
+
+  /* Book */
+  'Book': 'Livre',
+  'Open my book': 'Ouvrir mon livre',
+  'Switch theme': 'Changer de thème',
+  'Full Stack Engineer': 'Ingénieur Full Stack',
+  'A book of problems solved': 'Un livre de problèmes résolus',
+  'Turn the page': 'Tournez la page',
+  'Contents': 'Sommaire',
+  'Scroll to turn the pages, or use the arrows.': 'Faites défiler pour tourner les pages, ou utilisez les flèches.',
+  'Chapter 01': 'Chapitre 01',
+  'Chapter 02': 'Chapitre 02',
+  'Chapter 03': 'Chapitre 03',
+  'Chapter 04': 'Chapitre 04',
+  'Chapter 05': 'Chapitre 05',
+  'Chapter 06': 'Chapitre 06',
+  'In this chapter': 'Dans ce chapitre',
+  'The end': 'Fin',
+  'Thank you for reading.': 'Merci de votre lecture.',
+  'Back to the cover': 'Retour à la couverture',
+  'Written and built in Windhoek, Namibia.': 'Écrit et construit à Windhoek, en Namibie.',
+  'Previous page': 'Page précédente',
+  'Next page': 'Page suivante'
 };
