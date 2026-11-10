@@ -239,13 +239,14 @@
      Three layouts:
        spread  wide screens, two facing pages, leaves turn
        single  phones and tablets, one page at a time, each page turns away
-       flat    reduced motion or very short screens, pages simply stack */
+       flat    very short screens (phones held sideways), pages simply stack
+     With reduced motion the book still works, but pages swap instead of turning. */
   var sec = $('book');
   var book = $('bookEl');
   var leaves = Array.prototype.slice.call(book.querySelectorAll('.leaf'));
   var pages = Array.prototype.slice.call(book.querySelectorAll('.page'));
-  var spreadQuery = window.matchMedia('(min-width: 901px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)');
-  var singleQuery = window.matchMedia('(max-width: 900px) and (min-height: 520px) and (prefers-reduced-motion: no-preference)');
+  var spreadQuery = window.matchMedia('(min-width: 901px) and (min-height: 600px)');
+  var singleQuery = window.matchMedia('(max-width: 900px) and (min-height: 440px)');
   var mode = 'flat';
   var flipping = false;
   var N = 1;                             /* number of turns in the current layout */
@@ -371,7 +372,8 @@
   function paintBook() {
     var rawPos = clamp((window.scrollY - secTop) / travel) * N;
     var k = Math.min(N - 1, Math.floor(rawPos));
-    var turn = smooth(range(rawPos - k, 0.18, 0.82));
+    /* With reduced motion the page swaps at the midpoint instead of turning */
+    var turn = motionOK ? smooth(range(rawPos - k, 0.18, 0.82)) : (rawPos - k >= 0.5 ? 1 : 0);
     var items = mode === 'spread' ? leaves : pages;
     items.forEach(function (el, i) {
       turnState(el, i < k ? 1 : i === k ? turn : 0, i, items.length);
@@ -381,7 +383,7 @@
       var last = k === N - 1 ? turn : 0;
       book.style.setProperty('--shift', (-0.5 * (1 - first) + 0.5 * last).toFixed(4));
     }
-    book.style.setProperty('--enter', smooth(range(window.scrollY, secTop - vh * 0.95, secTop - vh * 0.05)).toFixed(4));
+    book.style.setProperty('--enter', motionOK ? smooth(range(window.scrollY, secTop - vh * 0.95, secTop - vh * 0.05)).toFixed(4) : '1');
     setCurrent(Math.round(k + turn));
   }
 

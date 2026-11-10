@@ -327,7 +327,7 @@ button { font: inherit; color: inherit; }
 .the-end__in p:not(.the-end__t) { color: var(--muted); margin-bottom: 1.6em; }
 
 /* ---------- 3D book on desktop ---------- */
-@media (min-width: 901px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
+@media (min-width: 901px) and (min-height: 600px) {
   .js .book-sec { --pw: min(calc((100svh - 190px) * .72), calc((100vw - 80px) / 2), 520px); --ph: calc(var(--pw) / .72); padding: 0; }
   .js .book-sec__pin {
     position: sticky; top: 0; height: 100vh; height: 100svh;
@@ -544,7 +544,7 @@ main, .nav__links { transition: opacity .25s; }
    Phone and tablet book: one page at a time, each page turns
    away around the spine on its left edge.
    ========================================================== */
-@media (max-width: 900px) and (min-height: 520px) and (prefers-reduced-motion: no-preference) {
+@media (max-width: 900px) and (min-height: 440px) {
   .js .book-sec {
     --pw: min(calc(100vw - 36px), 560px);
     --ph: min(calc(100svh - 168px), calc(var(--pw) * 1.75), 740px);
@@ -604,6 +604,8 @@ main, .nav__links { transition: opacity .25s; }
   .js .pj h3 { font-size: 1.7em; }
   .js .flow h3 { font-size: 1.1em; }
   .js .flow { gap: .7em; padding-top: .6em; margin-bottom: 1em; }
+  .js .skills { gap: .65em; }
+  .js .page h2 + .skills { margin-top: -.2em; }
   .js .quote { padding: .8em 1em; }
   .js .book-ctl { display: flex; align-items: center; gap: 14px; }
   .book-ctl__n { font-size: 13px; color: var(--muted); min-width: 64px; text-align: center; letter-spacing: .06em; }
