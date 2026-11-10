@@ -235,20 +235,27 @@
     if (e.key === 'Escape' && links.classList.contains('is-open')) { setMenu(false); toggle.focus(); }
   });
 
-  /* ---------- Book ---------- */
+  /* ---------- Book ----------
+     Three layouts:
+       spread  wide screens, two facing pages, leaves turn
+       single  phones and tablets, one page at a time, each page turns away
+       flat    reduced motion or very short screens, pages simply stack */
   var sec = $('book');
   var book = $('bookEl');
   var leaves = Array.prototype.slice.call(book.querySelectorAll('.leaf'));
   var pages = Array.prototype.slice.call(book.querySelectorAll('.page'));
-  var N = leaves.length;                 /* leaves; spreads run 0..N */
-  var UNIT = 0.8;                        /* viewport heights of scroll per page turn */
-  var bookQuery = window.matchMedia('(min-width: 901px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)');
+  var spreadQuery = window.matchMedia('(min-width: 901px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)');
+  var singleQuery = window.matchMedia('(max-width: 900px) and (min-height: 520px) and (prefers-reduced-motion: no-preference)');
+  var mode = 'flat';
   var flipping = false;
+  var N = 1;                             /* number of turns in the current layout */
+  var UNIT = 0.8;                        /* viewport heights of scroll per turn */
   var secTop = 0, travel = 1, vh = window.innerHeight;
-  var currentSpread = -1;
+  var current = -1;                      /* current spread (spread mode) or page (single mode) */
   var prevBtn = $('prevPage'), nextBtn = $('nextPage'), pageNum = $('pageNum');
   var film = $('workflowFilm');
   var navAnchors = Array.prototype.slice.call(links.querySelectorAll('a'));
+  var pageIndex = function (p) { return Number(p.getAttribute('data-page')); };
 
   pages.forEach(function (p) {
     Array.prototype.forEach.call(p.children, function (c, i) { c.style.setProperty('--d', i); });
@@ -294,76 +301,94 @@
     pages.forEach(function (p) { p.classList.add('is-in'); });
   }
 
-  /* A page's spread: fronts (even) sit on the right of spread k, backs on the left of spread k+1 */
-  function spreadOf(el) {
+  /* Where a page sits: its spread in spread mode, its own index in single mode */
+  function stepOf(el) {
     var pg = el.closest('.page');
     if (!pg) return 0;
-    var i = Number(pg.getAttribute('data-page'));
+    var i = pageIndex(pg);
+    if (mode === 'single') return i;
     return i % 2 === 0 ? i / 2 : (i + 1) / 2;
+  }
+
+  function clearBook() {
+    book.style.removeProperty('--shift');
+    leaves.forEach(function (l) { l.style.removeProperty('--r'); l.style.zIndex = ''; l.classList.remove('is-turning'); });
+    pages.forEach(function (p) {
+      p.style.removeProperty('--r'); p.style.zIndex = ''; p.classList.remove('is-turning');
+      p.inert = false; p.removeAttribute('aria-hidden'); p.classList.remove('is-shown');
+    });
   }
 
   function measure() {
     vh = window.innerHeight;
-    flipping = bookQuery.matches;
+    var next = spreadQuery.matches ? 'spread' : singleQuery.matches ? 'single' : 'flat';
+    if (next !== mode) clearBook();
+    mode = next;
+    flipping = mode !== 'flat';
     root.classList.toggle('is-book', flipping);
+    root.classList.toggle('is-single', mode === 'single');
     if (flipping) {
-      sec.style.height = (vh + N * UNIT * vh) + 'px';
-      secTop = sec.getBoundingClientRect().top + window.scrollY;
+      N = mode === 'spread' ? leaves.length : pages.length - 1;
+      UNIT = mode === 'spread' ? 0.8 : 0.6;
       travel = N * UNIT * vh;
+      sec.style.height = (vh + travel) + 'px';
+      secTop = sec.getBoundingClientRect().top + window.scrollY;
     } else {
       sec.style.height = '';
-      book.style.removeProperty('--shift');
-      leaves.forEach(function (l) { l.style.removeProperty('--r'); l.style.zIndex = ''; });
-      pages.forEach(function (p) { p.inert = false; p.removeAttribute('aria-hidden'); p.classList.remove('is-shown'); });
     }
   }
 
-  function yForSpread(s) { return secTop + (s / N) * travel; }
+  function yForStep(s) { return secTop + (s / N) * travel; }
 
-  function setSpread(s) {
-    if (s === currentSpread) return;
-    currentSpread = s;
+  function setCurrent(s) {
+    if (s === current) return;
+    current = s;
+    var shownIdx = mode === 'spread' ? [2 * s - 1, 2 * s] : [s];
     pages.forEach(function (p) {
-      var i = Number(p.getAttribute('data-page'));
-      var shown = i === 2 * s || i === 2 * s - 1;
+      var shown = shownIdx.indexOf(pageIndex(p)) !== -1;
       p.inert = !shown;
       p.classList.toggle('is-shown', shown);
       if (shown) p.removeAttribute('aria-hidden'); else p.setAttribute('aria-hidden', 'true');
     });
     pageNum.textContent = (s < 10 ? '0' : '') + s + ' / ' + N;
-    if (s === 2) countUp();
+    if (shownIdx.indexOf(3) !== -1) countUp();
     prevBtn.disabled = s <= 0;
     nextBtn.disabled = s >= N;
     if (film && motionOK) {
-      if (s === 10) { film.playbackRate = 0.75; var pl = film.play(); if (pl) pl.catch(function () {}); }
+      if (shownIdx.indexOf(19) !== -1) { film.playbackRate = 0.75; var pl = film.play(); if (pl) pl.catch(function () {}); }
       else film.pause();
     }
   }
 
+  function turnState(el, r, i, count) {
+    el.style.setProperty('--r', (r * 180).toFixed(2));
+    el.style.zIndex = r > 0 && r < 1 ? count + 2 : r >= 1 ? i + 1 : count - i;
+    el.classList.toggle('is-turning', r > 0 && r < 1);
+    var lift = Math.sin(Math.min(1, r * (mode === 'single' ? 2 : 1)) * Math.PI / (mode === 'single' ? 2 : 1));
+    el.querySelectorAll('.shade').forEach(function (sh) { sh.style.setProperty('--shade', (lift * 0.9).toFixed(3)); });
+  }
+
   function paintBook() {
-    var p = clamp((window.scrollY - secTop) / travel);
-    var rawPos = p * N;
+    var rawPos = clamp((window.scrollY - secTop) / travel) * N;
     var k = Math.min(N - 1, Math.floor(rawPos));
-    var frac = rawPos - k;
-    var turn = smooth(range(frac, 0.18, 0.82));
-    leaves.forEach(function (leaf, i) {
-      var r = i < k ? 1 : i === k ? turn : 0;
-      leaf.style.setProperty('--r', (r * 180).toFixed(2));
-      leaf.style.zIndex = r > 0 && r < 1 ? N + 2 : r >= 1 ? i + 1 : N - i;
-      leaf.classList.toggle('is-turning', r > 0 && r < 1);
-      var lift = Math.sin(r * Math.PI);
-      leaf.querySelectorAll('.shade').forEach(function (sh) { sh.style.setProperty('--shade', (lift * 0.9).toFixed(3)); });
+    var turn = smooth(range(rawPos - k, 0.18, 0.82));
+    var items = mode === 'spread' ? leaves : pages;
+    items.forEach(function (el, i) {
+      turnState(el, i < k ? 1 : i === k ? turn : 0, i, items.length);
     });
-    var first = leaves.length ? (k > 0 ? 1 : turn) : 0;
-    var last = k === N - 1 ? turn : 0;
-    book.style.setProperty('--shift', (-0.5 * (1 - first) + 0.5 * last).toFixed(4));
+    if (mode === 'spread') {
+      var first = k > 0 ? 1 : turn;
+      var last = k === N - 1 ? turn : 0;
+      book.style.setProperty('--shift', (-0.5 * (1 - first) + 0.5 * last).toFixed(4));
+    }
     book.style.setProperty('--enter', smooth(range(window.scrollY, secTop - vh * 0.95, secTop - vh * 0.05)).toFixed(4));
-    setSpread(Math.round(k + turn));
+    setCurrent(Math.round(k + turn));
   }
 
   /* ---------- Scroll loop ---------- */
   var progress = $('progress');
   var ticking = false;
+  var hero = $('home');
   function onScroll() {
     if (ticking) return;
     ticking = true;
@@ -372,20 +397,20 @@
       var max = root.scrollHeight - vh;
       progress.style.transform = 'scaleX(' + (max > 0 ? clamp(window.scrollY / max) : 0) + ')';
       if (flipping) paintBook();
+      root.classList.toggle('past-hero', window.scrollY > hero.offsetHeight * 0.55);
       spy();
       nudgeLamp();
     });
   }
 
   /* Active nav item follows the chapter in view */
-  var chapterSpreads = navAnchors.map(function (a) {
-    var el = document.querySelector(a.getAttribute('href'));
-    return el ? spreadOf(el) : 0;
-  });
   function spy() {
     var active = -1;
     if (flipping) {
-      chapterSpreads.forEach(function (s, i) { if (currentSpread >= s) active = i; });
+      navAnchors.forEach(function (a, i) {
+        var el = document.querySelector(a.getAttribute('href'));
+        if (el && current >= stepOf(el)) active = i;
+      });
       if (window.scrollY < secTop - vh * 0.3) active = -1;
     } else {
       navAnchors.forEach(function (a, i) {
@@ -399,15 +424,13 @@
     });
   }
 
-  /* Hash links: in book mode, turn to the right spread */
+  /* Hash links: in book mode, turn to the right page */
   function goTo(hash, instant) {
-    var target = hash === '#home' ? null : document.querySelector(hash);
     if (hash === '#home') { scrollToY(0, instant); return true; }
+    var target = document.querySelector(hash);
     if (!target) return false;
-    if (flipping && book.contains(target) || flipping && target === sec) {
-      var s = target === sec ? 0 : spreadOf(target);
-      if (target.hasAttribute && target.hasAttribute('data-cover')) s = 0;
-      scrollToY(yForSpread(s), instant);
+    if (flipping && (book.contains(target) || target === sec)) {
+      scrollToY(yForStep(target === sec ? 0 : stepOf(target)), instant);
     } else {
       scrollToY(target.getBoundingClientRect().top + window.scrollY - 84, instant);
     }
@@ -417,7 +440,7 @@
     var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
     if (!a) return;
     var hash = a.getAttribute('href');
-    if (a.hasAttribute('data-cover') && flipping) { e.preventDefault(); scrollToY(yForSpread(0)); return; }
+    if (a.hasAttribute('data-cover') && flipping) { e.preventDefault(); scrollToY(yForStep(0)); return; }
     if (goTo(hash)) {
       e.preventDefault();
       setMenu(false);
@@ -425,8 +448,8 @@
     }
   });
 
-  prevBtn.addEventListener('click', function () { scrollToY(yForSpread(Math.max(0, currentSpread - 1))); });
-  nextBtn.addEventListener('click', function () { scrollToY(yForSpread(Math.min(N, currentSpread + 1))); });
+  prevBtn.addEventListener('click', function () { scrollToY(yForStep(Math.max(0, current - 1))); });
+  nextBtn.addEventListener('click', function () { scrollToY(yForStep(Math.min(N, current + 1))); });
   document.addEventListener('keydown', function (e) {
     if (!flipping || e.altKey || e.ctrlKey || e.metaKey) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) return;
@@ -435,6 +458,21 @@
     if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn.click(); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
   });
+
+  /* Swipe left or right on the book to turn a page (touch screens) */
+  var swipe = null;
+  book.addEventListener('touchstart', function (e) {
+    if (!flipping || e.touches.length !== 1) return;
+    swipe = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }, { passive: true });
+  book.addEventListener('touchend', function (e) {
+    if (!swipe) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - swipe.x, dy = t.clientY - swipe.y;
+    swipe = null;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+    (dx < 0 ? nextBtn : prevBtn).click();
+  }, { passive: true });
 
   /* Flat layout: play the film only while it is on screen */
   if (film && motionOK && 'IntersectionObserver' in window) {
@@ -445,10 +483,17 @@
     }, { threshold: 0.2 }).observe(film);
   }
 
-  function relayout() {
-    currentSpread = -1;
+  /* Phones resize the viewport when the address bar slides; ignore height-only nudges */
+  var lastW = window.innerWidth, lastH = window.innerHeight;
+  function relayout(force) {
+    if (force !== true && window.innerWidth === lastW && Math.abs(window.innerHeight - lastH) < 120) return;
+    lastW = window.innerWidth; lastH = window.innerHeight;
+    var before = flipping && travel ? clamp((window.scrollY - secTop) / travel) : null;
+    var oldMode = mode;
+    current = -1;
     measure();
     if (!flipping && inkIO) pages.forEach(function (p) { inkIO.unobserve(p); inkIO.observe(p); });
+    if (flipping && oldMode === mode && before !== null && before > 0 && before < 1) scrollToY(secTop + before * travel, true);
     if (flipping) paintBook();
     onScroll();
   }
@@ -456,9 +501,9 @@
   if (flipping) paintBook();
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', relayout);
-  if (bookQuery.addEventListener) bookQuery.addEventListener('change', relayout);
+  [spreadQuery, singleQuery].forEach(function (q) { if (q.addEventListener) q.addEventListener('change', function () { relayout(true); }); });
   window.addEventListener('load', function () {
-    relayout();
+    relayout(true);
     if (window.location.hash) goTo(window.location.hash, true);
   });
 
