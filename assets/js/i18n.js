@@ -58,6 +58,8 @@ window.PORTFOLIO_FR = {
   'Visit live site': 'Voir le site',
   'Technologies': 'Technologies',
   'Built with Datalani Technology': 'Réalisé avec Datalani Technology',
+  'In collaboration with Datalani Technology': 'En collaboration avec Datalani Technology',
+  'Redesign, in collaboration with Datalani Technology': 'Refonte, en collaboration avec Datalani Technology',
   'Solo project': 'Projet solo',
   'Solo project, 144 commits': 'Projet solo, 144 commits',
   'Team project with Team Vortex': 'Projet d\'équipe avec Team Vortex',
