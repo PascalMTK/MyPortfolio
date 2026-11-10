@@ -76,8 +76,17 @@
     });
   });
 
-  /* ---------- Theme ---------- */
+  /* ---------- Smooth scrolling ---------- */
+  var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lenis = motionOK && window.Lenis ? new window.Lenis({ lerp: 0.1, smoothWheel: true }) : null;
+  function scrollToY(y, instant) {
+    if (lenis) lenis.scrollTo(y, { duration: instant ? 0 : 1.2, immediate: !!instant });
+    else window.scrollTo({ top: y, behavior: instant || !motionOK ? 'auto' : 'smooth' });
+  }
+
+  /* ---------- Theme, switched by pulling the lamp cord ---------- */
   var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   function isDark() {
     var set = root.getAttribute('data-theme');
     if (set) return set === 'dark';
@@ -85,19 +94,131 @@
   }
   function syncThemeColor() { themeMeta.setAttribute('content', isDark() ? '#0b0810' : '#f6f1e7'); }
   syncThemeColor();
-  $('themeToggle').addEventListener('click', function () {
-    var next = isDark() ? 'light' : 'dark';
+  try { if (window.localStorage.getItem('lampUsed') === '1') root.classList.add('lamp-used'); } catch (e) { /* not essential */ }
+
+  function setTheme(next) {
     root.setAttribute('data-theme', next);
     try { window.localStorage.setItem('theme', next); } catch (e) { /* not essential */ }
     syncThemeColor();
+  }
+  function switchTheme(x, y) {
+    var next = isDark() ? 'light' : 'dark';
+    root.classList.add('lamp-used');
+    try { window.localStorage.setItem('lampUsed', '1'); } catch (e) { /* not essential */ }
+    if (!document.startViewTransition || !motionOK) { setTheme(next); return; }
+    root.classList.add('theme-switching');
+    var done = function () { root.classList.remove('theme-switching'); };
+    var vt = document.startViewTransition(function () { setTheme(next); });
+    vt.ready.then(function () {
+      var r = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+      root.animate(
+        { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + r + 'px at ' + x + 'px ' + y + 'px)'] },
+        { duration: 800, easing: 'cubic-bezier(.65, 0, .35, 1)', pseudoElement: '::view-transition-new(root)' }
+      );
+    }).catch(done);
+    vt.finished.then(done, done);
+  }
+
+  var lampHang = $('lampHang');
+  var cord = $('lampString');
+  var bead = $('lampBead');
+  var grab = $('lampGrab');
+  var pull = 0, pullVel = 0, springing = false, drag = null;
+
+  function setPull(v) {
+    pull = v;
+    cord.setAttribute('y2', (140 + v).toFixed(2));
+    bead.setAttribute('cy', (146 + v).toFixed(2));
+  }
+  function springBack() {
+    if (springing) return;
+    springing = true;
+    (function step() {
+      if (drag) { springing = false; return; }
+      pullVel += -pull * 0.22;
+      pullVel *= 0.74;
+      setPull(pull + pullVel);
+      if (Math.abs(pull) < 0.15 && Math.abs(pullVel) < 0.15) { setPull(0); pullVel = 0; springing = false; return; }
+      window.requestAnimationFrame(step);
+    })();
+  }
+  function swingLamp() {
+    if (!motionOK) return;
+    lampHang.classList.remove('is-swinging');
+    void lampHang.offsetWidth;
+    lampHang.classList.add('is-swinging');
+  }
+  function fireLamp() {
+    var r = bead.getBoundingClientRect();
+    switchTheme(r.left + r.width / 2, r.top + r.height / 2);
+    swingLamp();
+  }
+
+  grab.addEventListener('pointerdown', function (e) {
+    e.preventDefault();
+    drag = { y: e.clientY, max: 0 };
+    pullVel = 0;
+    try { grab.setPointerCapture(e.pointerId); } catch (err) { /* not essential */ }
+  });
+  grab.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var dy = Math.max(0, e.clientY - drag.y);
+    drag.max = Math.max(drag.max, dy);
+    setPull(70 * (1 - Math.exp(-dy / 60)));
+  });
+  function release() {
+    if (!drag) return;
+    var d = drag;
+    drag = null;
+    if (d.max < 5 || pull > 24) fireLamp();
+    springBack();
+  }
+  grab.addEventListener('pointerup', release);
+  grab.addEventListener('pointercancel', release);
+
+  /* The round button above the lamp gives the cord a short tug */
+  $('themeToggle').addEventListener('click', function () {
+    if (!motionOK) { switchTheme(window.innerWidth - 60, 40); return; }
+    var t0 = null;
+    (function tug(now) {
+      if (t0 === null) t0 = now;
+      var k = Math.min(1, (now - t0) / 170);
+      setPull(36 * smooth(k));
+      if (k < 1) window.requestAnimationFrame(tug);
+      else { fireLamp(); springBack(); }
+    })(performance.now());
   });
 
-  /* ---------- Smooth scrolling ---------- */
-  var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var lenis = motionOK && window.Lenis ? new window.Lenis({ lerp: 0.1, smoothWheel: true }) : null;
-  function scrollToY(y, instant) {
-    if (lenis) lenis.scrollTo(y, { duration: instant ? 0 : 1.2, immediate: !!instant });
-    else window.scrollTo({ top: y, behavior: instant || !motionOK ? 'auto' : 'smooth' });
+  /* The lamp sways a little as the page scrolls */
+  var sway = 0, swayVel = 0, swaying = false, lastY = window.scrollY;
+  function nudgeLamp() {
+    var dy = window.scrollY - lastY;
+    lastY = window.scrollY;
+    if (!motionOK || !dy) return;
+    swayVel += Math.max(-0.8, Math.min(0.8, dy * 0.012));
+    if (swaying) return;
+    swaying = true;
+    (function step() {
+      swayVel += -sway * 0.045;
+      swayVel *= 0.93;
+      sway = Math.max(-12, Math.min(12, sway + swayVel));
+      lampHang.style.rotate = sway.toFixed(2) + 'deg';
+      if (Math.abs(sway) < 0.05 && Math.abs(swayVel) < 0.05) { sway = 0; lampHang.style.rotate = ''; swaying = false; return; }
+      window.requestAnimationFrame(step);
+    })();
+  }
+
+  /* Portrait tilts toward the pointer */
+  var photo = document.querySelector('.photo');
+  if (photo && finePointer && motionOK) {
+    var hero = $('home');
+    hero.addEventListener('pointermove', function (e) {
+      var r = photo.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      photo.style.transform = 'perspective(900px) rotateY(' + (x * 10).toFixed(2) + 'deg) rotateX(' + (y * -8).toFixed(2) + 'deg)';
+    });
+    hero.addEventListener('pointerleave', function () { photo.style.transform = ''; });
   }
 
   /* ---------- Nav menu ---------- */
@@ -130,11 +251,48 @@
   var navAnchors = Array.prototype.slice.call(links.querySelectorAll('a'));
 
   pages.forEach(function (p) {
+    Array.prototype.forEach.call(p.children, function (c, i) { c.style.setProperty('--d', i); });
     var s = document.createElement('i');
     s.className = 'shade';
     s.setAttribute('aria-hidden', 'true');
     p.appendChild(s);
   });
+
+  /* Stats count up the first time they are seen */
+  var counted = false;
+  function countUp() {
+    if (counted) return;
+    counted = true;
+    if (!motionOK) return;
+    document.querySelectorAll('.stat dd').forEach(function (dd, i) {
+      var node = dd.firstChild;
+      var match = node.nodeValue.match(/(\d+)(.*)/);
+      if (!match) return;
+      var end = Number(match[1]), suffix = match[2], begin = null;
+      node.nodeValue = '0' + suffix;
+      (function step(now) {
+        if (begin === null) begin = now + 250 + i * 90;
+        var k = clamp((now - begin) / 1400);
+        node.nodeValue = Math.round(end * (1 - Math.pow(1 - k, 4))) + suffix;
+        if (k < 1) window.requestAnimationFrame(step);
+      })(performance.now());
+    });
+  }
+
+  /* Stacked layout: pages ink in as they scroll into view */
+  if ('IntersectionObserver' in window) {
+    var inkIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || flipping) return;
+        entry.target.classList.add('is-in');
+        if (entry.target.getAttribute('data-page') === '3') countUp();
+        inkIO.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    pages.forEach(function (p) { inkIO.observe(p); });
+  } else {
+    pages.forEach(function (p) { p.classList.add('is-in'); });
+  }
 
   /* A page's spread: fronts (even) sit on the right of spread k, backs on the left of spread k+1 */
   function spreadOf(el) {
@@ -147,6 +305,7 @@
   function measure() {
     vh = window.innerHeight;
     flipping = bookQuery.matches;
+    root.classList.toggle('is-book', flipping);
     if (flipping) {
       sec.style.height = (vh + N * UNIT * vh) + 'px';
       secTop = sec.getBoundingClientRect().top + window.scrollY;
@@ -172,6 +331,7 @@
       if (shown) p.removeAttribute('aria-hidden'); else p.setAttribute('aria-hidden', 'true');
     });
     pageNum.textContent = (s < 10 ? '0' : '') + s + ' / ' + N;
+    if (s === 2) countUp();
     prevBtn.disabled = s <= 0;
     nextBtn.disabled = s >= N;
     if (film && motionOK) {
@@ -197,6 +357,7 @@
     var first = leaves.length ? (k > 0 ? 1 : turn) : 0;
     var last = k === N - 1 ? turn : 0;
     book.style.setProperty('--shift', (-0.5 * (1 - first) + 0.5 * last).toFixed(4));
+    book.style.setProperty('--enter', smooth(range(window.scrollY, secTop - vh * 0.95, secTop - vh * 0.05)).toFixed(4));
     setSpread(Math.round(k + turn));
   }
 
@@ -212,6 +373,7 @@
       progress.style.transform = 'scaleX(' + (max > 0 ? clamp(window.scrollY / max) : 0) + ')';
       if (flipping) paintBook();
       spy();
+      nudgeLamp();
     });
   }
 
@@ -286,6 +448,7 @@
   function relayout() {
     currentSpread = -1;
     measure();
+    if (!flipping && inkIO) pages.forEach(function (p) { inkIO.unobserve(p); inkIO.observe(p); });
     if (flipping) paintBook();
     onScroll();
   }

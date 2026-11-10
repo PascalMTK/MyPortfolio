@@ -56,10 +56,31 @@
         <button type="button" data-lang="en" aria-pressed="true" lang="en" title="English">EN</button>
         <button type="button" data-lang="fr" aria-pressed="false" lang="fr" title="Français">FR</button>
       </div>
-      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch theme">
-        <svg class="i-sun" width="18" height="18" aria-hidden="true"><use href="#i-sun"/></svg>
-        <svg class="i-moon" width="18" height="18" aria-hidden="true"><use href="#i-moon"/></svg>
-      </button>
+      <div class="lamp" id="lamp">
+        <button class="icon-btn lamp__mount" id="themeToggle" type="button" aria-label="Switch theme">
+          <svg class="i-sun" width="18" height="18" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="i-moon" width="18" height="18" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <div class="lamp__hang" id="lampHang" aria-hidden="true">
+          <span class="lamp__cone"></span>
+          <svg class="lamp__svg" viewBox="0 0 80 190" width="80" height="190">
+            <defs>
+              <linearGradient id="lampShade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="lamp__s1"/><stop offset="1" class="lamp__s2"/></linearGradient>
+            </defs>
+            <line class="lamp__wire" x1="40" y1="0" x2="40" y2="56"/>
+            <rect class="lamp__cap" x="34" y="52" width="12" height="10" rx="2"/>
+            <circle class="lamp__bulb" cx="40" cy="95" r="8.5"/>
+            <path class="lamp__shade" d="M40 60 C 24 60 15 72 10 92 L 70 92 C 65 72 56 60 40 60 Z"/>
+            <path class="lamp__rim" d="M10 92 L 70 92"/>
+            <g class="lamp__pull">
+              <line class="lamp__string" id="lampString" x1="60" y1="90" x2="60" y2="140"/>
+              <circle class="lamp__bead" id="lampBead" cx="60" cy="146" r="5.5"/>
+              <rect class="lamp__grab" id="lampGrab" x="44" y="86" width="32" height="76"/>
+            </g>
+          </svg>
+          <span class="lamp__hint mono">Pull me</span>
+        </div>
+      </div>
       <button class="nav__toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
     </div>
   </header>
@@ -67,10 +88,11 @@
   <main>
     <!-- Hero -->
     <section class="hero" id="home" aria-label="Introduction">
+      <div class="hero__orbs" aria-hidden="true"><i></i><i></i></div>
       <div class="wrap hero__grid">
         <div class="hero__copy">
           <p class="kick">Hey, I'm Pascal</p>
-          <h1><span>Full Stack</span> <span class="hl">Engineer</span></h1>
+          <h1><span class="ln"><span>Full Stack</span></span> <span class="ln"><span class="hl">Engineer</span></span></h1>
           <p class="hero__line">Software should <em>solve the problem.</em></p>
           <p class="hero__sub">I build web platforms for payments, delivery, training and bookings, from Windhoek, Namibia.</p>
           <div class="hero__cta">

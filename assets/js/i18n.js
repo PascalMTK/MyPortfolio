@@ -155,5 +155,6 @@ window.PORTFOLIO_FR = {
   'Back to the cover': 'Retour à la couverture',
   'Written and built in Windhoek, Namibia.': 'Écrit et construit à Windhoek, en Namibie.',
   'Previous page': 'Page précédente',
-  'Next page': 'Page suivante'
+  'Next page': 'Page suivante',
+  'Pull me': 'Tirez-moi'
 };
