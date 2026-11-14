@@ -295,6 +295,7 @@ button { font: inherit; color: inherit; }
 .more li { display: grid; gap: .3em; padding: 1em 0; border-bottom: 1px dashed var(--line); }
 .more b { font-size: 1.15em; }
 .more span { color: var(--muted); font-size: .95em; }
+.more .link { justify-self: start; margin-top: .2em; }
 
 /* Skills */
 .skills { display: grid; gap: .9em; }

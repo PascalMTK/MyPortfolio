@@ -110,7 +110,7 @@ window.PORTFOLIO_FR = {
   'NUST Electronic Voting': 'Vote électronique NUST',
   'A JavaFX and MySQL desktop app for student elections, with one vote per student per election.': 'Une application de bureau JavaFX et MySQL pour les élections étudiantes, avec un seul vote par étudiant et par élection.',
   'Blue Sky Website': 'Site web Blue Sky',
-  'A marketing site and customer portal for a money transfer agency, built with Next.js and Prisma.': 'Un site vitrine et un portail client pour une agence de transfert d\'argent, réalisés avec Next.js et Prisma.',
+  'A marketing site and customer portal for a money transfer agency serving 9 African countries, in French, English and Swahili, built with Next.js and Prisma.': 'Un site vitrine et un portail client pour une agence de transfert d\'argent présente dans 9 pays africains, en français, anglais et swahili, réalisés avec Next.js et Prisma.',
 
   /* Skills */
   'The tools I reach for.': 'Les outils que j\'utilise.',
