@@ -53,7 +53,7 @@ window.PORTFOLIO_FR = {
 
   /* Projects */
   'Selected work': 'Projets choisis',
-  'Six projects, six real problems.': 'Six projets, six vrais problèmes.',
+  'Seven projects, seven real problems.': 'Sept projets, sept vrais problèmes.',
   'Live': 'En ligne',
   'Visit live site': 'Voir le site',
   'Technologies': 'Technologies',
@@ -77,6 +77,14 @@ window.PORTFOLIO_FR = {
   'Monthly charts, top agents, printable receipts and Excel export': 'Graphiques mensuels, meilleurs agents, reçus imprimables et export Excel',
   'French and English interface, with dark and light modes': 'Interface en français et en anglais, avec modes sombre et clair',
   'BlueSky Transactions landing page in French for sending money across Africa': 'Page d\'accueil de BlueSky Transactions pour envoyer de l\'argent à travers l\'Afrique',
+
+  'Money transfer website': 'Site de transfert d\'argent',
+  'Built for Blue Sky Money Transfer': 'Réalisé pour Blue Sky Money Transfer',
+  'The public website and customer portal for Blue Sky, a money transfer agency based in Lubumbashi. Visitors estimate fees, find an agency and open an account, then follow their transfers and savings from a personal dashboard.': 'Le site public et le portail client de Blue Sky, une agence de transfert d\'argent basée à Lubumbashi. Les visiteurs estiment les frais, trouvent une agence et ouvrent un compte, puis suivent leurs transferts et leur épargne depuis un tableau de bord personnel.',
+  'Fee estimator driven by tariff bands the staff manage': 'Estimateur de frais basé sur des tranches tarifaires gérées par l\'équipe',
+  'Customer accounts with email code verification, transfers and savings': 'Comptes clients avec vérification par code e-mail, transferts et épargne',
+  'French, English and Swahili, plus a staff panel for messages and news': 'Français, anglais et swahili, avec un espace équipe pour les messages et les actualités',
+  'Blue Sky home page in French with the headline Votre argent voyage and a fee estimator': 'Page d\'accueil de Blue Sky avec le titre Votre argent voyage et un estimateur de frais',
 
   'Training management': 'Gestion de formations',
   'A training platform for individuals, organisations and administrators. People can browse courses, enrol and earn certificates, and anyone can verify a certificate publicly.': 'Une plateforme de formation pour les particuliers, les organisations et les administrateurs. Chacun peut parcourir les cours, s\'inscrire et obtenir des certificats, et n\'importe qui peut vérifier un certificat publiquement.',
@@ -110,7 +118,6 @@ window.PORTFOLIO_FR = {
   'NUST Electronic Voting': 'Vote électronique NUST',
   'A JavaFX and MySQL desktop app for student elections, with one vote per student per election.': 'Une application de bureau JavaFX et MySQL pour les élections étudiantes, avec un seul vote par étudiant et par élection.',
   'Blue Sky Website': 'Site web Blue Sky',
-  'A marketing site and customer portal for a money transfer agency serving 9 African countries, in French, English and Swahili, built with Next.js and Prisma.': 'Un site vitrine et un portail client pour une agence de transfert d\'argent présente dans 9 pays africains, en français, anglais et swahili, réalisés avec Next.js et Prisma.',
 
   /* Skills */
   'The tools I reach for.': 'Les outils que j\'utilise.',
